@@ -1,1 +1,1 @@
-# udacity-recopes-social-network
+# udacity-recipes-social-network
