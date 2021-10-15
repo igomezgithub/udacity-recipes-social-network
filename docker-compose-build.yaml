@@ -1,0 +1,6 @@
+version: "3"
+services:
+  backend_recipe:
+    build:
+      context: ./backend/api-recipe
+    image: igomezdockerhub/recipes-social-network-api-recipe:v1.01
