@@ -1,0 +1,7 @@
+version: "3"
+services:
+  backend-recipe:
+    image: igomezdockerhub/recipes-social-network-api-recipe:v1.01
+    ports:
+      - "8080:3000"
+    
