@@ -89,7 +89,7 @@ router.post('/',
 router.delete('/:id',
 async (req: Request, res: Response) => {
   const {id} = req.params;
-  const item = await Recipe.destroy({ where: { id: id } });
+  await (await Recipe.findByPk(id)).destroy();
   res.status(204).send();
 });
 
