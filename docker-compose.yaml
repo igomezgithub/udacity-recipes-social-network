@@ -1,7 +1,38 @@
 version: "3"
 services:
-  backend-recipe:
+  recipe-backend:
     image: igomezdockerhub/recipes-social-network-api-recipe:v1.01
+    container_name: backend_api_recipe
     ports:
-      - "8080:3000"
-    
+      - "3000:3000"
+    environment:
+      POSTGRES_USER: userdev
+      POSTGRES_PASSWORD: 6W94pD9XNJ6BrDk2
+      POSTGRES_DB: recipes_social_network_database_dev
+      POSTGRES_HOST: recipe-db
+      POSTGRES_DIALECT: postgres
+    networks:
+      - database
+    depends_on:
+        - recipe-db
+  
+  recipe-db:
+    image: postgres:13-alpine
+    container_name: postgresql_db
+    restart: always
+    environment:
+      POSTGRES_USER: userdev
+      POSTGRES_PASSWORD: 6W94pD9XNJ6BrDk2
+      POSTGRES_DB: recipes_social_network_database_dev
+    volumes:
+      - recipe-db:/var/lib/postgresql/data
+    ports:
+      - 5452:5432
+    networks:
+      - database
+
+volumes:
+  recipe-db:
+
+networks:
+  database:
