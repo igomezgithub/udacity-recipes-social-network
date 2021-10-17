@@ -1,15 +1,18 @@
-import {Table, Column, Model, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import {Table, Column, Model, CreatedAt, UpdatedAt, DataType} from 'sequelize-typescript';
 
 
-@Table
+@Table({ tableName: 'Recipes' })
 export class Recipe extends Model<Recipe> {
   @Column
+  public title!: string;
+
+  @Column(DataType.TEXT)
   public method!: string;
 
   @Column
   public url!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public ingredients!: string;
 
   @Column

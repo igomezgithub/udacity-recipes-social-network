@@ -4,5 +4,5 @@ export const config = {
   'database': process.env.POSTGRES_DB,
   'host': process.env.POSTGRES_HOST,
   'port': process.env.POSTGRES_PORT,
-  'dialect': 'postgres'
+  'dialect': process.env.POSTGRES_DIALECT
 };

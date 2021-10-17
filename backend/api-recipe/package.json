@@ -7,6 +7,7 @@
     "start": "node .",
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "seed": "sequelize db:seed:all",
     "prod": "tsc && node ./www/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,6 +33,7 @@
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",
     "eslint-config-google": "^0.14.0",
+    "sequelize-cli": "^6.2.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.4"
   }

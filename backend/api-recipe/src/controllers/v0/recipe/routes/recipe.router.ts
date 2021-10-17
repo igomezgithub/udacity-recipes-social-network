@@ -26,14 +26,14 @@ const router: Router = Router();
 //   });
 // }
 
-// Get all recipe items
+// Get all recipes items
 router.get('/', async (req: Request, res: Response) => {
   const items = await Recipe.findAndCountAll({order: [['id', 'DESC']]});
-//   items.rows.map((item) => {
-//     if (item.url) {
-//       item.url = AWS.getGetSignedUrl(item.url);
-//     }
-//   });
+  // items.rows.map((item) => {
+  //   if (item.url) {
+  //     item.url = AWS.getGetSignedUrl(item.url);
+  //   }
+  // });
   res.send(items);
 });
 

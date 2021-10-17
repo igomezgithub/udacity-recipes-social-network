@@ -10,6 +10,7 @@ services:
       POSTGRES_PASSWORD: 6W94pD9XNJ6BrDk2
       POSTGRES_DB: recipes_social_network_database_dev
       POSTGRES_HOST: recipe-db
+      POSTGRES_DIALECT: postgres
     networks:
       - database
     depends_on:
