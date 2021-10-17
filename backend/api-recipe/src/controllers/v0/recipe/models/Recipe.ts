@@ -2,7 +2,7 @@ import {Table, Column, Model, CreatedAt, UpdatedAt, DataType} from 'sequelize-ty
 
 
 @Table({ tableName: 'Recipes' })
-export class Recipe extends Model<Recipe> {
+export class Recipe extends Model {
   @Column
   public title!: string;
 

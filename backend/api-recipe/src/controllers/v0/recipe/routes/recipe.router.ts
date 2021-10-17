@@ -1,5 +1,5 @@
-import {Router, Request, Response} from 'express';
-import {Recipe} from '../models/Recipe';
+import { Router, Request, Response } from 'express';
+import { Recipe } from '../models/Recipe';
 // import {NextFunction} from 'connect';
 // import * as jwt from 'jsonwebtoken';
 // import * as AWS from '../../../../aws';
@@ -37,13 +37,13 @@ router.get('/', async (req: Request, res: Response) => {
   res.send(items);
 });
 
-// // Get a feed resource
-// router.get('/:id',
-//     async (req: Request, res: Response) => {
-//       const {id} = req.params;
-//       const item = await FeedItem.findByPk(id);
-//       res.send(item);
-//     });
+// Get a recipe resource
+router.get('/:id',
+    async (req: Request, res: Response) => {
+      const {id} = req.params;
+      const item = await Recipe.findByPk(id);
+      res.send(item);
+    });
 
 // // Get a signed url to put a new item in the bucket
 // router.get('/signed-url/:fileName',
@@ -54,30 +54,43 @@ router.get('/', async (req: Request, res: Response) => {
 //       res.status(201).send({url: url});
 //     });
 
-// // Create feed with metadata
-// router.post('/',
-//     requireAuth,
-//     async (req: Request, res: Response) => {
-//       const caption = req.body.caption;
-//       const fileName = req.body.url; // same as S3 key name
+// Create a recipe with metadata
+router.post('/',
+    async (req: Request, res: Response) => {
+      const title: string = req.body.title;
+      const method: string = req.body.method;
+      const ingredients: string = req.body.ingredients;
+      const rate: number = req.body.rate;
+      // const fileName = req.body.url; // same as S3 key name
 
-//       if (!caption) {
-//         return res.status(400).send({message: 'Caption is required or malformed.'});
-//       }
+      if (!title) {
+        return res.status(400).send({message: 'Title is required or malformed.'});
+      }
 
-//       if (!fileName) {
-//         return res.status(400).send({message: 'File url is required.'});
-//       }
+      // if (!fileName) {
+      //   return res.status(400).send({message: 'File url is required.'});
+      // }
 
-//       const item = await new FeedItem({
-//         caption: caption,
-//         url: fileName,
-//       });
+      const item = new Recipe({
+        title: title,
+        method: method,
+        url: '',
+        ingredients: ingredients,
+        rate: rate
+      });
 
-//       const savedItem = await item.save();
+      const savedItem = await item.save();
 
-//       savedItem.url = AWS.getGetSignedUrl(savedItem.url);
-//       res.status(201).send(savedItem);
-//     });
+      // savedItem.url = AWS.getGetSignedUrl(savedItem.url);
+      res.status(201).send(savedItem);
+    });
+
+// Get a recipe resource
+router.delete('/:id',
+async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const item = await Recipe.destroy({ where: { id: id } });
+  res.status(204).send();
+});
 
 export const RecipeRouter: Router = router;
