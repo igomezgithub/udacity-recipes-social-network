@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "90c44738-86d0-440c-ac60-dcb7b70fb9e8",
+		"_postman_id": "bdd812fc-d516-4ee8-8bad-ab2d6791ce56",
 		"name": "recipes-social-network-api",
 		"description": "Recipes, ingredients and share your own recipes with others API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -10,12 +10,11 @@
 			"name": "Public",
 			"item": [
 				{
-					"name": "/api/v0/recipes",
+					"name": "/api/v0/recipes Get All recipes",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "1ad01629-c164-41ef-9d19-0a5fd13274af",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -37,10 +36,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{host}}/api/v0/recipes",
 							"host": [
@@ -57,12 +52,11 @@
 					"response": []
 				},
 				{
-					"name": "/api/v0/recipes/:id",
+					"name": "/api/v0/recipes/:id Get a recipe",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "1ad01629-c164-41ef-9d19-0a5fd13274af",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -84,12 +78,8 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
-							"raw": "{{host}}/api/v0/recipes/:id",
+							"raw": "{{host}}/api/v0/recipes/1",
 							"host": [
 								"{{host}}"
 							],
@@ -97,93 +87,84 @@
 								"api",
 								"v0",
 								"recipes",
-								":id"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "4",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "3"
-								}
+								"1"
 							]
 						},
 						"description": "Request a specific recipe item detail"
 					},
-					"response": [
+					"response": []
+				},
+				{
+					"name": "/api/v0/recipes Create a recipe",
+					"event": [
 						{
-							"name": "/api/v0/recipes/:id",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/v0/recipes/:id",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"v0",
-										"recipes",
-										":id"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "4",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "3"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "133"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"85-gic7UchUXbyxmSqNsq7nx4+Eaas\""
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 26 Mar 2019 15:07:32 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"id\": 3,\n    \"caption\": \"hello0.5278862272947393\",\n    \"url\": null,\n    \"createdAt\": \"2019-03-26T14:16:58.442Z\",\n    \"updatedAt\": \"2019-03-26T14:16:58.443Z\"\n}"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The count is equal to the number of items rx\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.count).to.eql(jsonData.rows.length);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"title\": \"Sheet pan parmesan chicken and veggies\",\r\n\t\"method\": \"Step-1: Preheat the oven to 400 degrees F (200 degrees C). Line a sheet pan with parchment paper. \\nStep-2: Combine oregano, parsley, paprika, garlic powder, seasoned salt, and pepper in a small bowl. \\nStep-3: Place green beans, potato, bell pepper, broccoli, and garlic on the prepared sheet pan. Drizzle olive oil on top and sprinkle with 1/2 of the seasoning mix; toss to coat. Spread vegetables on one side of the pan. \\nStep-4: Place flour in a bowl. Place melted butter in a second bowl. Combine panko, 2/3 cup Parmesan cheese, and the remaining 1/2 of the seasoning mix in a third bowl. \\nStep-5: Remove any excess fat from chicken breasts and slice into 1 1/4 inch strips. Coat chicken strips in flour, then dredge in melted butter, and then dip in the Parmesan-panko mixture until heavily coated. Place on the empty half of the sheet pan and sprinkle with any remaining Parmesan-panko mixture, pressing onto the chicken. \\nStep-6: Bake in the preheated oven for 10 minutes. Remove from the oven, flip chicken strips, stir the veggies, and return to the oven. Bake until chicken juices run clear and veggies are crisp-tender, 10 to 15 minutes. An instant-read thermometer inserted into the center of the chicken should read at least 165 degrees F (74 degrees C). \\nStep-7: While the chicken is baking, whisk together mayonnaise, ketchup, garlic powder, and Worcestershire sauce. \\nStep-8: Remove chicken and veggies from the oven. Toss veggies with remaining Parmesan cheese. Serve with dipping sauce.\",\r\n    \"ingredients\": \"1 tablespoon dried oregano, 1 tablespoon dried parsley, 1 teaspoon paprika, ½ teaspoon garlic powder, ¼ teaspoon seasoned salt, or to taste, ¼ teaspoon ground black pepper, or to taste, ½ pound fresh green beans, trimmed, 1 small red potato, diced, 1 sweet bell pepper, chopped, 1 cup broccoli florets, chopped, 1 tablespoon minced garlic, 3 tablespoons olive oil, ⅓ cup all-purpose flour, 4 tablespoons butter, melted, 1 cup panko bread crumbs, 1 cup freshly grated Parmesan cheese, divided, 1 ½ pounds skinless, boneless chicken breasts, pounded flat\",\r\n    \"rate\": \"4\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/recipes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"recipes"
+							]
+						},
+						"description": "Get all the items in the recipe"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v0/recipes/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"recipes",
+								"1"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "/api/v0/users/auth valid registration",
@@ -191,7 +172,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4fa0ec55-4fb1-4eda-a7a3-08af62324ede",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -245,7 +225,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b3737edc-f79e-4823-b2c5-e84e6359e173",
 								"exec": [
 									"pm.test(\"Status code is 400\", function () {",
 									"    pm.response.to.have.status(400);",
@@ -300,7 +279,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "5524b249-cd4d-4e75-91c4-b2f690d53d44",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -359,7 +337,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "41cd51df-9472-4d8d-9177-b4f54d6a8530",
 								"exec": [
 									"pm.test(\"Status code is 400\", function () {",
 									"    pm.response.to.have.status(400);",
@@ -420,7 +397,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1ad01629-c164-41ef-9d19-0a5fd13274af",
 								"exec": [
 									"pm.test(\"Status code is 401\", function () {",
 									"    pm.response.to.have.status(401);",
@@ -467,7 +443,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1ad01629-c164-41ef-9d19-0a5fd13274af",
 								"exec": [
 									"pm.test(\"Status code is 400\", function () {",
 									"    pm.response.to.have.status(400);",
@@ -521,7 +496,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1ad01629-c164-41ef-9d19-0a5fd13274af",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -584,7 +558,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "65e7c108-0985-4ca7-9613-0898f005cf76",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -594,7 +567,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "cf28f76e-ffbb-4199-b636-1c080a86e465",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -608,7 +580,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "bc5d9c7a-7a6b-49ed-af16-206e17e8732f",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -618,7 +589,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "a7cb0174-2461-42e2-979e-1b5922eea0fe",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -628,10 +598,8 @@
 	],
 	"variable": [
 		{
-			"id": "3e3ea131-5328-4f50-8fe1-516e3995917d",
 			"key": "host",
-			"value": "http://localhost:8080",
-			"type": "string"
+			"value": "http://localhost:3000"
 		}
 	]
 }
