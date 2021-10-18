@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { CommentMSG, RecipeMSG } from 'src/common/constants';
 import { IComment } from 'src/common/interfaces/comment.interface';
 import { ClientProxyRecipesSocialNetwork } from 'src/common/proxy/client-proxy';
 import { CommentDTO } from './dto/comment.dto';
 
+@ApiTags('comments')
 @Controller('api/v0/comment')
 export class CommentController {
     constructor(private readonly clientProxy: ClientProxyRecipesSocialNetwork) { };

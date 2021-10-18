@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { CommentMSG, RecipeMSG } from 'src/common/constants';
 import { IRecipe } from 'src/common/interfaces/recipe.interface';
 import { ClientProxyRecipesSocialNetwork } from 'src/common/proxy/client-proxy';
 import { RecipeDTO } from './dto/recipe.dto';
 
+@ApiTags('recipes')
 @Controller('api/v0/recipe')
 export class RecipeController {
     constructor(private readonly clientProxy: ClientProxyRecipesSocialNetwork) { };
