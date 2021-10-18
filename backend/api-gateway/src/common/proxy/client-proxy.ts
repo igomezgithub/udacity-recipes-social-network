@@ -17,4 +17,24 @@ export class ClientProxyRecipesSocialNetwork {
             }
         });
     }
+
+    clientProxyRecipes(): ClientProxy {
+        return ClientProxyFactory.create({
+            transport: Transport.RMQ,
+            options: {
+                urls: this.config.get('AMQP_URL'),
+                queue: RabbitMQ.CommentQueue
+            }
+        });
+    }
+
+    clientProxyComments(): ClientProxy {
+        return ClientProxyFactory.create({
+            transport: Transport.RMQ,
+            options: {
+                urls: this.config.get('AMQP_URL'),
+                queue: RabbitMQ.RecipeQueue
+            }
+        });
+    }
 }
