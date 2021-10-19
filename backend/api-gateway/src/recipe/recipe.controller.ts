@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CommentMSG, RecipeMSG } from 'src/common/constants';
 import { IRecipe } from 'src/common/interfaces/recipe.interface';
 import { ClientProxyRecipesSocialNetwork } from 'src/common/proxy/client-proxy';
 import { RecipeDTO } from './dto/recipe.dto';
 
 @ApiTags('recipes')
+@UseGuards(JwtAuthGuard)
 @Controller('api/v0/recipe')
 export class RecipeController {
     constructor(private readonly clientProxy: ClientProxyRecipesSocialNetwork) { };

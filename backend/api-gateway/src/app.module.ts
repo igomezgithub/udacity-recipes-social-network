@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { CommentModule } from './comment/comment.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { CommentModule } from './comment/comment.module';
     }),
     UserModule,
     RecipeModule,
-    CommentModule
+    CommentModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
