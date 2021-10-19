@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from "class-validator";
+import { Type } from 'class-transformer';
+import { IsDate, IsNotEmpty, IsString } from "class-validator";
 
 export class CommentDTO {
     @ApiProperty()
@@ -19,6 +20,7 @@ export class CommentDTO {
 
     @ApiProperty()
     @IsNotEmpty()
-    @IsString()
+    @Type(() => Date)
+    @IsDate()
     readonly commentDate: Date;
 }
