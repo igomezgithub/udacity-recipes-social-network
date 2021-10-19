@@ -15,6 +15,7 @@ async function bootstrap() {
     .setTitle('Recipes Social Network API')
     .setDescription('API to connect with the recipes social network app')
     .setVersion('1.0.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
