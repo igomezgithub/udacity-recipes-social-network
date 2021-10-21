@@ -12,7 +12,7 @@ COPY package*.json ./
 RUN npm ci
 
 # Bundle app source
-COPY ./dist ./src
+COPY . .
 
 # Define the Docker image's behavior at runtime
-CMD ["node", "src/main.js"]
+CMD ["npm", "run", "start:prod"]

@@ -1,20 +1,20 @@
 version: "3"
 services:
   reverseproxy:
-    image: igomezdockerhub/recipes-social-network-api-gateway:v1.01
+    image: recipes-social-network-api-gateway:v1.01
     container_name: recipes-api-gateway
     environment:
       APP_URL: https://recipes-social-network.com
       PORT: 3000
-      AMQP_URL: amqp://recipes-rabbitmq:5672
-      URI_MONGODB: mongodb://recipes-mongodb:27017/recipes-social-network
+      AMQP_URL: amqp://rabbitmq:5672
+      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
       JWT_SECRET: JWTrBOf5a7mX#vN
       EXPIRES_IN: 12h
     ports:
       - 80:3000
     depends_on:
-      - recipes-mongodb
-      - recipes-rabbitmq
+      - mongodb
+      - rabbitmq
     restart: always
     networks:
       - recipes_network
@@ -25,11 +25,13 @@ services:
     environment:
       APP_URL: https://recipes-social-network.com
       PORT: 3000
-      AMQP_URL: amqps://adxxikja:9-K67aUWBm0_l4h9gNcw9YYmWOW-gu8u@shrimp.rmq.cloudamqp.com/adxxikja
-      URI_MONGODB: mongodb://localhost:27017/recipes-social-network
+      AMQP_URL: amqp://rabbitmq:5672
+      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
+      JWT_SECRET: JWTrBOf5a7mX#vN
+      EXPIRES_IN: 12h
     depends_on:
-      - recipes-mongodb
-      - recipes-rabbitmq
+      - mongodb
+      - rabbitmq
     restart: always
     networks:
       - recipes_network
@@ -40,11 +42,13 @@ services:
     environment:
       APP_URL: https://recipes-social-network.com
       PORT: 3000
-      AMQP_URL: amqps://adxxikja:9-K67aUWBm0_l4h9gNcw9YYmWOW-gu8u@shrimp.rmq.cloudamqp.com/adxxikja
-      URI_MONGODB: mongodb://localhost:27017/recipes-social-network
+      AMQP_URL: amqp://rabbitmq:5672
+      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
+      JWT_SECRET: JWTrBOf5a7mX#vN
+      EXPIRES_IN: 12h
     depends_on:
-      - recipes-mongodb
-      - recipes-rabbitmq
+      - mongodb
+      - rabbitmq
     restart: always
     networks:
       - recipes_network
@@ -55,18 +59,20 @@ services:
     environment:
       APP_URL: https://recipes-social-network.com
       PORT: 3000
-      AMQP_URL: amqps://adxxikja:9-K67aUWBm0_l4h9gNcw9YYmWOW-gu8u@shrimp.rmq.cloudamqp.com/adxxikja
-      URI_MONGODB: mongodb://localhost:27017/recipes-social-network
+      AMQP_URL: amqp://rabbitmq:5672
+      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
+      JWT_SECRET: JWTrBOf5a7mX#vN
+      EXPIRES_IN: 12h
     depends_on:
-      - recipes-mongodb
-      - recipes-rabbitmq
+      - mongodb
+      - rabbitmq
     restart: always
     networks:
       - recipes_network
 
-  recipes-rabbitmq:
+  rabbitmq:
     image: rabbitmq:3-management
-    container_name: recipes-rabbitmq
+    container_name: rmq
     expose:
       - 5672
       - 15672
@@ -74,9 +80,9 @@ services:
     networks:
       - recipes_network
 
-  recipes-mongodb:
+  mongodb:
     image: mongo:latest
-    container_name: recipes-mongodb
+    container_name: mongodb
     restart: always
     environment:
       - MONGO_DATA_DIR=/data/db
