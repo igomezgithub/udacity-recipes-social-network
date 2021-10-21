@@ -28,5 +28,5 @@ script:
   - docker-compose -f docker-compose-build.yaml build
 
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push "$DOCKER_USERNAME"/recipes-social-network-api-recipe:v1.01
+#  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#  - docker push "$DOCKER_USERNAME"/recipes-social-network-api-recipe:v1.01
