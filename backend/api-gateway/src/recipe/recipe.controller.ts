@@ -9,11 +9,11 @@ import { RecipeDTO } from './dto/recipe.dto';
 
 @ApiTags('recipes')
 @UseGuards(JwtAuthGuard)
-@Controller('api/v0/recipe')
+@Controller('api/v0/recipes')
 export class RecipeController {
     constructor(private readonly clientProxy: ClientProxyRecipesSocialNetwork) { };
 
-    private _clientProxyRecipe = this.clientProxy.clientProxyUsers();
+    private _clientProxyRecipe = this.clientProxy.clientProxyRecipes();
     private _clientProxyComment = this.clientProxy.clientProxyComments();
 
     @Post()
@@ -36,7 +36,7 @@ export class RecipeController {
         return this._clientProxyRecipe.send(RecipeMSG.UPDATE, { id, recipeDto });
     }
 
-    @Delete()
+    @Delete(':id')
     delete(@Param('id') id: string): Observable<any> {
         return this._clientProxyRecipe.send(RecipeMSG.DELETE, id);
     }

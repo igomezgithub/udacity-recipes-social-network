@@ -19,7 +19,6 @@ export class CommentDTO {
     readonly rate: number;
 
     @ApiProperty()
-    @IsNotEmpty()
     @Type(() => Date)
     @IsDate()
     readonly commentDate: Date;

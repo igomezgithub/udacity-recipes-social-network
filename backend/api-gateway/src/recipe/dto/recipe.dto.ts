@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString, ValidateIf } from "class-validator";
 
 
 export class RecipeDTO {
@@ -15,11 +15,10 @@ export class RecipeDTO {
 
     @ApiProperty()
     @IsNotEmpty()
-    @IsEmail()
+    @IsString()
     readonly ingredients: string;
     
     @ApiProperty()
-    @IsNotEmpty()
     @IsString()
     readonly url: string;
 }

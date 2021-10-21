@@ -9,11 +9,11 @@ import { CommentDTO } from './dto/comment.dto';
 
 @ApiTags('comments')
 @UseGuards(JwtAuthGuard)
-@Controller('api/v0/comment')
+@Controller('api/v0/comments')
 export class CommentController {
     constructor(private readonly clientProxy: ClientProxyRecipesSocialNetwork) { };
 
-    private _clientProxyComment = this.clientProxy.clientProxyUsers();
+    private _clientProxyComment = this.clientProxy.clientProxyComments();
 
     @Post()
     create(@Body() commentDto: CommentDTO): Observable<IComment> {
@@ -35,7 +35,7 @@ export class CommentController {
         return this._clientProxyComment.send(CommentMSG.UPDATE, { id, commentDto });
     }
 
-    @Delete()
+    @Delete(':id')
     delete(@Param('id') id: string): Observable<any> {
         return this._clientProxyComment.send(CommentMSG.DELETE, id);
     }
