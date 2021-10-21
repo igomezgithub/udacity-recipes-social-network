@@ -1,6 +1,18 @@
 version: "3"
 services:
-  backend_recipe:
+  reverseproxy:
     build:
-      context: ./backend/api-recipe
-    image: igomezdockerhub/recipes-social-network-api-recipe:v1.01
+      context: ./backend/api-gateway
+    image: igomezdockerhub/recipes-social-network-api-gateway:v1.01
+  recipe-microservice:
+    build:
+      context: ./backend/recipe-microservice
+    image: igomezdockerhub/recipes-social-network-recipe-microservice:v1.01
+  comment-microservice:
+    build:
+      context: ./backend/comment-microservice
+    image: igomezdockerhub/recipes-social-network-comment-microservice:v1.01
+  user-microservice:
+    build:
+      context: ./backend/user-microservice
+    image: igomezdockerhub/recipes-social-network-user-microservice:v1.01
