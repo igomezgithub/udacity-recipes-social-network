@@ -9,11 +9,11 @@ import { UserDTO } from './dto/user.dto';
 
 @ApiTags('users')
 @UseGuards(JwtAuthGuard)
-@Controller('api/v0/user')
+@Controller('api/v0/users')
 export class UserController {
-    constructor(private readonly clientProxy: ClientProxyRecipesSocialNetwork) { };
-
     private _clientProxyUser = this.clientProxy.clientProxyUsers();
+
+    constructor(private readonly clientProxy: ClientProxyRecipesSocialNetwork) { };
 
     @Post()
     create(@Body() userDto: UserDTO): Observable<IUser> {
@@ -35,7 +35,7 @@ export class UserController {
         return this._clientProxyUser.send(UserMSG.UPDATE, { id, userDto });
     }
 
-    @Delete()
+    @Delete(':id')
     delete(@Param('id') id: string): Observable<any> {
         return this._clientProxyUser.send(UserMSG.DELETE, id);
     }

@@ -1,38 +1,101 @@
 version: "3"
 services:
-  recipe-backend:
-    image: igomezdockerhub/recipes-social-network-api-recipe:v1.01
-    container_name: backend_api_recipe
-    ports:
-      - "3000:3000"
+  reverseproxy:
+    image: recipes-social-network-api-gateway:v1.01
+    container_name: recipes-api-gateway
     environment:
-      POSTGRES_USER: userdev
-      POSTGRES_PASSWORD: 6W94pD9XNJ6BrDk2
-      POSTGRES_DB: recipes_social_network_database_dev
-      POSTGRES_HOST: recipe-db
-      POSTGRES_DIALECT: postgres
-    networks:
-      - database
+      APP_URL: https://recipes-social-network.com
+      PORT: 3000
+      AMQP_URL: amqp://rabbitmq:5672
+      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
+      JWT_SECRET: JWTrBOf5a7mX#vN
+      EXPIRES_IN: 12h
+    ports:
+      - 80:3000
     depends_on:
-        - recipe-db
-  
-  recipe-db:
-    image: postgres:13-alpine
-    container_name: postgresql_db
+      - mongodb
+      - rabbitmq
+    restart: always
+    networks:
+      - recipes_network
+
+  recipe-microservice:
+    image: recipes-social-network-recipe-microservice:v1.01
+    container_name: recipe-microservice
+    environment:
+      APP_URL: https://recipes-social-network.com
+      PORT: 3000
+      AMQP_URL: amqp://rabbitmq:5672
+      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
+      JWT_SECRET: JWTrBOf5a7mX#vN
+      EXPIRES_IN: 12h
+    depends_on:
+      - mongodb
+      - rabbitmq
+    restart: always
+    networks:
+      - recipes_network
+
+  comment-microservice:
+    image: recipes-social-network-comment-microservice:v1.01
+    container_name: comment-microservice
+    environment:
+      APP_URL: https://recipes-social-network.com
+      PORT: 3000
+      AMQP_URL: amqp://rabbitmq:5672
+      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
+      JWT_SECRET: JWTrBOf5a7mX#vN
+      EXPIRES_IN: 12h
+    depends_on:
+      - mongodb
+      - rabbitmq
+    restart: always
+    networks:
+      - recipes_network
+
+  user-microservice:
+    image: recipes-social-network-user-microservice:v1.01
+    container_name: user-microservice
+    environment:
+      APP_URL: https://recipes-social-network.com
+      PORT: 3000
+      AMQP_URL: amqp://rabbitmq:5672
+      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
+      JWT_SECRET: JWTrBOf5a7mX#vN
+      EXPIRES_IN: 12h
+    depends_on:
+      - mongodb
+      - rabbitmq
+    restart: always
+    networks:
+      - recipes_network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rmq
+    expose:
+      - 5672
+      - 15672
+    restart: always
+    networks:
+      - recipes_network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
     restart: always
     environment:
-      POSTGRES_USER: userdev
-      POSTGRES_PASSWORD: 6W94pD9XNJ6BrDk2
-      POSTGRES_DB: recipes_social_network_database_dev
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
     volumes:
-      - recipe-db:/var/lib/postgresql/data
-    ports:
-      - 5452:5432
+      - mongodb:/data/db
+    expose:
+      - 27017
     networks:
-      - database
+      - recipes_network
 
 volumes:
-  recipe-db:
+  mongodb:
 
 networks:
-  database:
+  recipes_network:

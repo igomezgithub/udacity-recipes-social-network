@@ -25,7 +25,7 @@ export class RecipeController {
 
     @MessagePattern(RecipeMSG.UPDATE)
     update(@Payload() payload: any) {
-        return this.recipeService.update(payload.id, payload.recipeDTO);
+        return this.recipeService.update(payload.id, payload.recipeDto);
     }
 
     @MessagePattern(RecipeMSG.DELETE)
