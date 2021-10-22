@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe-microservice
+  labels:
+    app: recipe-microservice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: recipe-microservice
+  template:
+    metadata:
+      labels:
+        app: recipe-microservice
+    spec:
+      containers:
+      - name: recipe-microservice
+        image: igomezdockerhub/recipes-social-network-recipe-microservice:v1.01
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "2048Mi"
+            cpu: "1000m"            
+        env:
+        - name: AWS_PROFILE
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: AWS_PROFILE
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: AWS_REGION
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: JWT_SECRET
+        - name: APP_URL
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: APP_URL
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: PORT
+        - name: AMQP_URL
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: AMQP_URL
+        - name: URI_MONGODB
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: URI_MONGODB
+        - name: EXPIRES_IN
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: EXPIRES_IN
+        volumeMounts:
+        - name: aws-secret
+          mountPath: "/root/.aws"
+          readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret

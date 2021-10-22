@@ -4,12 +4,14 @@ services:
     image: recipes-social-network-api-gateway:v1.01
     container_name: recipes-api-gateway
     environment:
-      APP_URL: https://recipes-social-network.com
-      PORT: 3000
-      AMQP_URL: amqp://rabbitmq:5672
-      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
-      JWT_SECRET: JWTrBOf5a7mX#vN
-      EXPIRES_IN: 12h
+      APP_URL: $APP_URL
+      PORT: $PORT
+      AMQP_URL: $AMQP_URL
+      URI_MONGODB: $URI_MONGODB
+      EXPIRES_IN: $EXPIRES_IN
+      AWS_REGION: $AWS_REGION
+      AWS_PROFILE: $AWS_PROFILE
+      JWT_SECRET: $JWT_SECRET
     ports:
       - 80:3000
     depends_on:
@@ -23,12 +25,14 @@ services:
     image: recipes-social-network-recipe-microservice:v1.01
     container_name: recipe-microservice
     environment:
-      APP_URL: https://recipes-social-network.com
-      PORT: 3000
-      AMQP_URL: amqp://rabbitmq:5672
-      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
-      JWT_SECRET: JWTrBOf5a7mX#vN
-      EXPIRES_IN: 12h
+      APP_URL: $APP_URL
+      PORT: $PORT
+      AMQP_URL: $AMQP_URL
+      URI_MONGODB: $URI_MONGODB
+      EXPIRES_IN: $EXPIRES_IN
+      AWS_REGION: $AWS_REGION
+      AWS_PROFILE: $AWS_PROFILE
+      JWT_SECRET: $JWT_SECRET
     depends_on:
       - mongodb
       - rabbitmq
@@ -40,12 +44,14 @@ services:
     image: recipes-social-network-comment-microservice:v1.01
     container_name: comment-microservice
     environment:
-      APP_URL: https://recipes-social-network.com
-      PORT: 3000
-      AMQP_URL: amqp://rabbitmq:5672
-      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
-      JWT_SECRET: JWTrBOf5a7mX#vN
-      EXPIRES_IN: 12h
+      APP_URL: $APP_URL
+      PORT: $PORT
+      AMQP_URL: $AMQP_URL
+      URI_MONGODB: $URI_MONGODB
+      EXPIRES_IN: $EXPIRES_IN
+      AWS_REGION: $AWS_REGION
+      AWS_PROFILE: $AWS_PROFILE
+      JWT_SECRET: $JWT_SECRET
     depends_on:
       - mongodb
       - rabbitmq
@@ -57,12 +63,14 @@ services:
     image: recipes-social-network-user-microservice:v1.01
     container_name: user-microservice
     environment:
-      APP_URL: https://recipes-social-network.com
-      PORT: 3000
-      AMQP_URL: amqp://rabbitmq:5672
-      URI_MONGODB: mongodb://mongodb:27017/recipes-social-network
-      JWT_SECRET: JWTrBOf5a7mX#vN
-      EXPIRES_IN: 12h
+      APP_URL: $APP_URL
+      PORT: $PORT
+      AMQP_URL: $AMQP_URL
+      URI_MONGODB: $URI_MONGODB
+      EXPIRES_IN: $EXPIRES_IN
+      AWS_REGION: $AWS_REGION
+      AWS_PROFILE: $AWS_PROFILE
+      JWT_SECRET: $JWT_SECRET
     depends_on:
       - mongodb
       - rabbitmq
