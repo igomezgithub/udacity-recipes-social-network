@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  AWS_MEDIA_BUCKET: __AWS_MEDIA_BUCKET__
+  AWS_PROFILE: __AWS_PROFILE__
+  AWS_REGION: __AWS_REGION__
+  POSTGRESS_DATABASE: __POSTGRESS_DATABASE__
+  POSTGRESS_HOST: __POSTGRESS_HOST__
+  URL: __URL__
+metadata:
+  name: env-config
