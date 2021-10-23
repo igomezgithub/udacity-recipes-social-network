@@ -7,11 +7,10 @@ import { HomeComponent } from './home.component';
 const homeRoutes: Routes = [
   { path: '', component: HomeComponent,
     children: [
+      {path: '', component: SignupComponent },
       {path: 'signup', component: SignupComponent },
       {path: 'login', component: LoginComponent }
-  ]
-
-  }
+  ]}
 ];
 
 @NgModule({
