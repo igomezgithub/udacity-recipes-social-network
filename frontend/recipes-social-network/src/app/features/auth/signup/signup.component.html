@@ -4,27 +4,27 @@
       <mat-card-title>Create an account</mat-card-title>
     </mat-card-header>
 
-    <form class="signup-form">
+    <form class="signup-form" [formGroup]="registerForm" (submit)="onSubmit($event)">
       <mat-card-content>
         <mat-form-field class="signup-full-width">
-          <input matInput placeholder="Username">
+          <input matInput placeholder="Username" formControlName="username" required>
+          <mat-error *ngIf="geUsernameErrorMessage() !== null">{{geUsernameErrorMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="signup-full-width">
-          <input matInput placeholder="Email">
+          <input matInput placeholder="Email" formControlName="email" required>
+          <mat-error *ngIf="geEmailErrorMessage() !== null">{{geEmailErrorMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="signup-full-width">
-          <input matInput placeholder="Password">
+          <input matInput placeholder="Password" formControlName="password" required>
+          <mat-error *ngIf="getPasswordErrorMessage() != null">{{getPasswordErrorMessage()}}</mat-error>
         </mat-form-field>
 
-        <!-- <mat-form-field class="signup-full-width">
-          <mat-label>Choose a role...</mat-label>
-          <mat-select>
-            <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field> -->
+        <mat-form-field class="signup-full-width">
+          <input matInput placeholder="Confirm Password" formControlName="password_confirm" required>
+          <mat-error *ngIf="getConfirmPasswordErrorMessage() != null">{{getConfirmPasswordErrorMessage()}}</mat-error>
+        </mat-form-field>
       </mat-card-content>
       <button mat-stroked-button color="accent" class="btn-block">Register</button>
     </form>

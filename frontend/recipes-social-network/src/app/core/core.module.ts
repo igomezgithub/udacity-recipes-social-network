@@ -1,11 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { ApiService } from './auth/api.service';
 
 @NgModule({
   imports: [
     HttpClientModule
   ],
-  providers: [ ]
+  providers: [ ApiService ]
 })
 export class CoreModule {
 
