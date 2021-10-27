@@ -1,30 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: comment-microservice
+  name: api-gateway
   labels:
-    app: comment-microservice
+    app: api-gateway
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: comment-microservice
+      app: api-gateway
   template:
     metadata:
       labels:
-        app: comment-microservice
+        app: api-gateway
     spec:
       containers:
-      - name: comment-microservice
-        image: igomezdockerhub/recipes-social-network-comment-microservice:v1.02
+      - image: igomezdockerhub/recipes-social-network-api-gateway:v1.02
+        name: api-gateway
         imagePullPolicy: Always
         resources:
           requests:
             memory: "64Mi"
             cpu: "250m"
           limits:
-            memory: "2048Mi"
-            cpu: "1000m"            
+            memory: "1024Mi"
+            cpu: "500m" 
+        ports:
+        - containerPort: 8080
         env:
         - name: AWS_PROFILE
           valueFrom:
@@ -66,12 +68,4 @@ spec:
             configMapKeyRef:
               name: env-config
               key: EXPIRES_IN
-        volumeMounts:
-        - name: aws-secret
-          mountPath: "/root/.aws"
-          readOnly: true
       restartPolicy: Always
-      volumes:
-        - name: aws-secret
-          secret:
-            secretName: aws-secret

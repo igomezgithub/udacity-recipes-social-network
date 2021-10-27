@@ -1,8 +1,19 @@
 version: "3"
 services:
   reverseproxy:
+      image: recipes-social-network-reverseproxy:v1.02
+      container_name: recipes-reverseproxy
+      ports:
+          - 8080:8080
+      restart: always
+      depends_on:
+        - api-gateway
+  api-gateway:
     image: recipes-social-network-api-gateway:v1.02
     container_name: recipes-api-gateway
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials
+      - $HOME/.aws/config:/root/.aws/config
     environment:
       APP_URL: $APP_URL
       PORT: $PORT
@@ -24,6 +35,9 @@ services:
   recipe-microservice:
     image: recipes-social-network-recipe-microservice:v1.02
     container_name: recipe-microservice
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials
+      - $HOME/.aws/config:/root/.aws/config
     environment:
       APP_URL: $APP_URL
       PORT: $PORT
@@ -43,6 +57,9 @@ services:
   comment-microservice:
     image: recipes-social-network-comment-microservice:v1.02
     container_name: comment-microservice
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials
+      - $HOME/.aws/config:/root/.aws/config
     environment:
       APP_URL: $APP_URL
       PORT: $PORT
@@ -62,6 +79,9 @@ services:
   user-microservice:
     image: recipes-social-network-user-microservice:v1.02
     container_name: user-microservice
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials
+      - $HOME/.aws/config:/root/.aws/config
     environment:
       APP_URL: $APP_URL
       PORT: $PORT
@@ -81,7 +101,7 @@ services:
     image: recipes-social-network-frontend:v1.02
     container_name: frontend
     ports:
-      - "80:80"
+      - "8100:80"
 
   rabbitmq:
     image: rabbitmq:3-management

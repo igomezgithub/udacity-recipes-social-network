@@ -2,6 +2,10 @@ version: "3"
 services:
   reverseproxy:
     build:
+      context: ./backend/reverseproxy
+    image: recipes-social-network-reverseproxy:v1.02
+  api-gateway:
+    build:
       context: ./backend/api-gateway
     image: recipes-social-network-api-gateway:v1.02
   recipe-microservice:
