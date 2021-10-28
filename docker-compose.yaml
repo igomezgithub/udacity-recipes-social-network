@@ -1,16 +1,17 @@
 version: "3"
 services:
-  reverseproxy:
-      image: recipes-social-network-reverseproxy:v1.02
-      container_name: recipes-reverseproxy
-      ports:
-          - 8080:8080
-      restart: always
-      depends_on:
-        - api-gateway
+  # reverseproxy:
+  #     image: recipes-social-network-reverseproxy:v1.02
+  #     ports:
+  #         - 3000:3000
+  #     restart: always
+  #     depends_on:
+  #       - api-gateway
+  #     networks:
+  #     - recipes_network
   api-gateway:
     image: recipes-social-network-api-gateway:v1.02
-    container_name: recipes-api-gateway
+    container_name: api-gateway
     volumes:
       - $HOME/.aws/credentials:/root/.aws/credentials
       - $HOME/.aws/config:/root/.aws/config
@@ -23,8 +24,6 @@ services:
       AWS_REGION: $AWS_REGION
       AWS_PROFILE: $AWS_PROFILE
       JWT_SECRET: $JWT_SECRET
-    ports:
-      - 3000:3000
     depends_on:
       - mongodb
       - rabbitmq

@@ -29,23 +29,23 @@ export class ApiService {
     this.token = token;
   }
 
-  get(endpoint: any): Promise<any> {
+  async get(endpoint: any): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
     const request = this.http.get(url, this.httpOptions).pipe(map(() => ApiService.extractData));
 
-    return request
+    return await request
             .toPromise()
-            .catch((e) => {
+            .catch((e: any) => {
               ApiService.handleError(e);
               throw e;
             });
   }
 
-  post(endpoint: any, data: any): Promise<any> {
+  async post(endpoint: any, data: any): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
-    return this.http.post<HttpEvent<any>>(url, data, this.httpOptions)
+    return await this.http.post<HttpEvent<any>>(url, data, this.httpOptions)
             .toPromise()
-            .catch((e) => {
+            .catch((e: any) => {
               ApiService.handleError(e);
               throw e;
             });
@@ -61,8 +61,8 @@ export class ApiService {
                                     reportProgress: true, // track progress
                                   });
 
-    return new Promise ( resolve => {
-        this.http.request(req).subscribe((resp) => {
+    return await new Promise ( resolve => {
+        this.http.request(req).subscribe((resp: any) => {
         if (resp && (<any> resp).status && (<any> resp).status === 200) {
           resolve(this.post(endpoint, payload));
         }
