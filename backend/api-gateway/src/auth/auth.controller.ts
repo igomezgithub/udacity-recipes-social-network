@@ -1,11 +1,11 @@
-import { ConsoleLogger, Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { ConsoleLogger, Body, Controller, Post, Get, Req, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserDTO } from 'src/user/dto/user.dto';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @ApiTags('Authentication')
-@Controller('api/v0/auth')
+@Controller('/api/v0/auth')
 export class AuthController {
     private readonly logger = new ConsoleLogger(AuthController.name);
     constructor(private readonly authService: AuthService) { }
@@ -16,9 +16,14 @@ export class AuthController {
         return await this.authService.signIn(req.user);
     }
 
-    @Post('/signup')
+    @Post('signup')
     async signUp(@Body() userDTO: UserDTO) {
         this.logger.debug('User DTO: ', userDTO);
         return await this.authService.signUp(userDTO);
     }
+
+    @Get('signup')
+    getHello(): string {
+    return this.authService.getHello();
+  }
 }

@@ -9,7 +9,7 @@ const API_HOST = environment.apiHost;
 export class ApiService {
   token: string = '';
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
+    headers: new HttpHeaders({'Content-Type': 'text/plain'})
   };
 
   constructor(private http: HttpClient) {
@@ -43,9 +43,11 @@ export class ApiService {
 
   async post(endpoint: any, data: any): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
+    console.log('URL: ', url);
     return await this.http.post<HttpEvent<any>>(url, data, this.httpOptions)
             .toPromise()
             .catch((e: any) => {
+              console.log('Post Error: ', e);
               ApiService.handleError(e);
               throw e;
             });

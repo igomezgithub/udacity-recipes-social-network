@@ -8,18 +8,23 @@ async function bootstrap() {
   console.log('Start NestJS');
   const app = await NestFactory.create(AppModule);
   console.log('Nest instanced');
-  app.useGlobalFilters(new AllExceptionFilter());
-  app.useGlobalInterceptors(new TimeOutInterceptor());
- 
+
   // CORS configuration
   app.enableCors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: [
+      'Origin', 'X-Requested-With',
+      'Content-Type', 'Accept',
+      'X-Access-Token', 'Authorization',
+    ],
+    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
     preflightContinue: true,
-    credentials: true,
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, X-Access-Token, Authorization'
+    credentials: false,
+    origin: '*'
   });
   console.log('CORS configured');
+
+  app.useGlobalFilters(new AllExceptionFilter());
+  app.useGlobalInterceptors(new TimeOutInterceptor());
 
   // Swagger configuration
   const options = new DocumentBuilder()
