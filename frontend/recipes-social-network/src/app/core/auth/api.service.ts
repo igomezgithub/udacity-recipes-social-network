@@ -9,7 +9,7 @@ const API_HOST = environment.apiHost;
 export class ApiService {
   token: string = '';
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'text/plain'})
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   constructor(private http: HttpClient) {

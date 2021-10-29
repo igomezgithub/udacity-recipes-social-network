@@ -48,17 +48,16 @@ export class AuthService {
     console.log('Auth Service - Register');
     console.log('  User: ', user);
     console.log('  Password: ', password);
-    // return await this.api.post('/auth/signup',
-    //   {name: user.username, username: user.username, email: user.email, password: password})
-    //   .then((res: any) => {
-    //     console.log('Register successfully');
-    //     console.log('  User: ', res.user);
-    //     console.log('  Token: ', res.token);
-    //     this.setTokenAndUser(res.token, res.user);
-    //     return res;
-    //   })
-    //   .catch((e: any) => { throw e; });
-    return await this.api.get('/auth/signup')
+    return await this.api.post('/auth/signup',
+      {name: user.username, username: user.username, email: user.email, password: password})
+      .then((res: any) => {
+        console.log('Register successfully');
+        console.log('  Complete Object: ', res);
+        console.log('  User: ', res.user);
+        console.log('  Token: ', res.token);
+        this.setTokenAndUser(res.token, res.user);
+        return res;
+      })
       .catch((e: any) => { throw e; });
   }
 }

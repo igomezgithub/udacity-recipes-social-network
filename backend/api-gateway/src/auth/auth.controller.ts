@@ -21,9 +21,5 @@ export class AuthController {
         this.logger.debug('User DTO: ', userDTO);
         return await this.authService.signUp(userDTO);
     }
-
-    @Get('signup')
-    getHello(): string {
-    return this.authService.getHello();
   }
 }

@@ -5,9 +5,7 @@ import { AllExceptionFilter } from './common/filters/http-exception.filter';
 import { TimeOutInterceptor } from './common/interceptors/timeout.interceptor';
 
 async function bootstrap() {
-  console.log('Start NestJS');
   const app = await NestFactory.create(AppModule);
-  console.log('Nest instanced');
 
   // CORS configuration
   app.enableCors({
@@ -17,11 +15,10 @@ async function bootstrap() {
       'X-Access-Token', 'Authorization',
     ],
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    preflightContinue: true,
+    preflightContinue: false,
     credentials: false,
     origin: '*'
   });
-  console.log('CORS configured');
 
   app.useGlobalFilters(new AllExceptionFilter());
   app.useGlobalInterceptors(new TimeOutInterceptor());
@@ -41,10 +38,9 @@ async function bootstrap() {
     }
   });
 
-  console.log('URL configured');
-
   // App listen port
-  await app.listen(process.env.PORT || 3000);
-  console.log('PORT configured');
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  console.log('Starting server in port ' + port);
 }
 bootstrap();
