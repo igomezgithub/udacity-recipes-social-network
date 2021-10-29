@@ -38,6 +38,7 @@
 .login-wrapper .signup-full-width,
 .login-wrapper .btn-block {
   width: 100%;
+  padding-top: 10px;
 }
 
 .login-wrapper mat-card-header {

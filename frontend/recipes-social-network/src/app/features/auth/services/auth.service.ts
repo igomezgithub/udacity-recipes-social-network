@@ -45,17 +45,10 @@ export class AuthService {
   }
 
   async register(user: User, password: string): Promise<any> {
-    console.log('Auth Service - Register');
-    console.log('  User: ', user);
-    console.log('  Password: ', password);
     return await this.api.post('/auth/signup',
       {name: user.username, username: user.username, email: user.email, password: password})
       .then((res: any) => {
-        console.log('Register successfully');
-        console.log('  Complete Object: ', res);
-        console.log('  User: ', res.user);
-        console.log('  Token: ', res.token);
-        this.setTokenAndUser(res.token, res.user);
+        this.setTokenAndUser(res.access_token, res.user);
         return res;
       })
       .catch((e: any) => { throw e; });

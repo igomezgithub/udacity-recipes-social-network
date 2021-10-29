@@ -18,8 +18,6 @@ export class AuthController {
 
     @Post('signup')
     async signUp(@Body() userDTO: UserDTO) {
-        this.logger.debug('User DTO: ', userDTO);
         return await this.authService.signUp(userDTO);
     }
-  }
 }

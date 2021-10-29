@@ -101,7 +101,7 @@ export class SignupComponent implements OnInit {
     };
 
     this.auth.register(newuser, this.registerForm.controls.password.value)
-      .then((username: string) => {
+      .then((token: any) => {
         Swal.fire({
           title: 'Ok!',
           text: 'User register susccessfully',

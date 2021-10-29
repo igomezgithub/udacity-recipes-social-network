@@ -1,15 +1,15 @@
 version: "3"
 services:
-  reverseproxy:
-      image: recipes-social-network-reverseproxy:v1.02
-      container_name: reverseproxy
-      ports:
-          - 8080:8080
-      restart: always
-      depends_on:
-        - api-gateway
-      networks:
-      - recipes_network
+  # reverseproxy:
+  #     image: recipes-social-network-reverseproxy:v1.02
+  #     container_name: reverseproxy
+  #     ports:
+  #         - 8080:8080
+  #     restart: always
+  #     depends_on:
+  #       - api-gateway
+  #     networks:
+  #     - recipes_network
   api-gateway:
     image: recipes-social-network-api-gateway:v1.02
     container_name: api-gateway
@@ -96,11 +96,11 @@ services:
     restart: always
     networks:
       - recipes_network
-  frontend:
-    image: recipes-social-network-frontend:v1.02
-    container_name: frontend
-    ports:
-      - "8100:80"
+  # frontend:
+  #   image: recipes-social-network-frontend:v1.02
+  #   container_name: frontend
+  #   ports:
+  #     - "8100:80"
 
   rabbitmq:
     image: rabbitmq:3-management

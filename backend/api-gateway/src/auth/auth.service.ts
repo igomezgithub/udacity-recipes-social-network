@@ -28,6 +28,14 @@ export class AuthService {
     }
 
     async signUp(userDTO: UserDTO) {
-        return await this._clientProxyUser.send(UserMSG.CREATE, userDTO).toPromise();
+        const newUser = await this._clientProxyUser.send(UserMSG.CREATE, userDTO).toPromise();
+        console.log('New User: ', newUser);
+
+        const payload = {
+            username: newUser.username,
+            sub: newUser._id
+        };
+
+        return { access_token: this.jwtService.sign(payload), user: payload.username };
     }
 }
