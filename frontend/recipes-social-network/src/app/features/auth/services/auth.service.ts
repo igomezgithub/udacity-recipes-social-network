@@ -8,7 +8,7 @@ const USER_LOCALSTORE_KEY = 'user';
 
 @Injectable()
 export class AuthService {
-  currentUser$: BehaviorSubject<User> = new BehaviorSubject<User>({ email: '', username: ''});
+  currentUser$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   constructor(private api: ApiService) {
     this.initToken();
   }

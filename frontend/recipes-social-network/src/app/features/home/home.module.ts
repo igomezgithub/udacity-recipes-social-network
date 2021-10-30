@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomePageComponent } from './pages/home-page.component';
 import { RecipeModule } from '../recipe/recipe.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
@@ -11,7 +11,7 @@ import { HomeRoutingModule } from './home-routing.module';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomePageComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +20,7 @@ import { HomeRoutingModule } from './home-routing.module';
     HomeRoutingModule
   ],
   exports: [
-    HomeComponent
+    HomePageComponent
   ]
 })
 export class HomeModule { }

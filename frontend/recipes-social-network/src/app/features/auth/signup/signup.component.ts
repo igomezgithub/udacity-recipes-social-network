@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditMode } from 'src/app/shared/enums/edit-mode.enum';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,11 @@ export class SignupComponent implements OnInit {
   error: string = '';
 
   // private auth: AuthService,
-  constructor(private formBuilder: FormBuilder, private auth: AuthService, private dialog: MatDialog) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private auth: AuthService,
+    private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -102,12 +107,7 @@ export class SignupComponent implements OnInit {
 
     this.auth.register(newuser, this.registerForm.controls.password.value)
       .then((token: any) => {
-        Swal.fire({
-          title: 'Ok!',
-          text: 'User register susccessfully',
-          icon: 'success',
-          confirmButtonText: 'Cool'
-        })
+        this.router.navigate(['/recipes']);
       })
       .catch((e) => {
         this.error = e.statusText;
