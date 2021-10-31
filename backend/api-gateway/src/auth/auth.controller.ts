@@ -13,11 +13,13 @@ export class AuthController {
     @UseGuards(LocalAuthGuard)
     @Post('signin')
     async signIn(@Req() req) {
+        this.logger.log('[API-GATEWAY] [SignIn] This is the request: ', req);
         return await this.authService.signIn(req.user);
     }
 
     @Post('signup')
     async signUp(@Body() userDTO: UserDTO) {
+        this.logger.log('[API-GATEWAY] [SignUp] This is the body: ', userDTO);
         return await this.authService.signUp(userDTO);
     }
 }

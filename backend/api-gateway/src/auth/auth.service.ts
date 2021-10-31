@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserMSG } from 'src/common/constants';
 import { ClientProxyRecipesSocialNetwork } from 'src/common/proxy/client-proxy';
@@ -6,6 +6,7 @@ import { UserDTO } from 'src/user/dto/user.dto';
 
 @Injectable()
 export class AuthService {
+    private readonly logger = new ConsoleLogger(AuthService.name);
     constructor(private readonly clientService: ClientProxyRecipesSocialNetwork, private readonly jwtService: JwtService) { }
 
     private _clientProxyUser = this.clientService.clientProxyUsers(); 
@@ -28,8 +29,9 @@ export class AuthService {
     }
 
     async signUp(userDTO: UserDTO) {
+        this.logger.log('[API-GATEWAY] [SignUp] Creating a new user...');
         const newUser = await this._clientProxyUser.send(UserMSG.CREATE, userDTO).toPromise();
-        console.log('New User: ', newUser);
+        this.logger.log('[API-GATEWAY] [SignUp] New User: ', newUser);
 
         const payload = {
             username: newUser.username,
