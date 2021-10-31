@@ -15,7 +15,7 @@ spec:
         app: api-gateway
     spec:
       containers:
-      - image: igomezdockerhub/recipes-social-network-api-gateway:v1.02
+      - image: igomezdockerhub/recipes-social-network-api-gateway:v1.03
         name: api-gateway
         imagePullPolicy: Always
         resources:
