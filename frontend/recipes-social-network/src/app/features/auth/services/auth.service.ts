@@ -28,19 +28,24 @@ export class AuthService {
     this.currentUser$.next(user);
   }
 
-  async login(email: string, password: string): Promise<any> {
-    return this.api.post('/users/auth/login',
-              {email: email, password: password})
-              .then((res) => {
-                this.setTokenAndUser(res.token, res.user);
-                return res;
-              })
-              .catch((e) => { throw e; });
-      // return user !== undefined;
+  removeTokenAndUser(token: string) {
+    localStorage.removeItem(JWT_LOCALSTORE_KEY);
+    localStorage.removeItem(USER_LOCALSTORE_KEY);
+    this.api.setAuthToken(token);
+  }
+
+  async login(username: string, password: string): Promise<any> {
+    return this.api.post('/auth/signin',
+      {username: username, password: password})
+      .then((res) => {
+        this.setTokenAndUser(res.access_token, res.user);
+        return res;
+      })
+      .catch((e) => { throw e; });
   }
 
   logout(): boolean {
-    this.setTokenAndUser('', { email: '', username: ''});
+    this.removeTokenAndUser('');
     return true;
   }
 

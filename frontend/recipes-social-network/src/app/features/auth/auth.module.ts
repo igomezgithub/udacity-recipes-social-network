@@ -12,8 +12,13 @@ import { AuthGuard } from './services/auth.guard';
   ],
   imports: [
     SharedModule
-   ],
-
-   providers: [ AuthService, AuthGuard ]
+  ],
+  exports: [
+    LoginComponent
+  ],
+  providers: [
+    AuthService,
+    AuthGuard
+  ]
 })
 export class AuthModule { }

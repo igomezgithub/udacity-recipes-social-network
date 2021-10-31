@@ -66,3 +66,32 @@
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
 }
+
+.router-link {
+  margin-top: 10px;
+}
+
+/* unvisited link */
+a:link {
+  color: red;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: #B376CD;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+p {
+  font-size: 1rem;
+  text-align: right;
+}

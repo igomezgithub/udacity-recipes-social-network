@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './features/auth/services/auth.guard';
+import { LoginComponent } from './features/auth/login/login.component';
 import { SignupComponent } from './features/auth/signup/signup.component';
-import { HomePageComponent } from './features/home/pages/home-page.component';
 
 const appRoutes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,7 +11,7 @@ const appRoutes: Routes = [
 
   // { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: '', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule) },
-  { path: 'signup', component: SignupComponent },
+  // { path: 'auth/signin', component: LoginComponent },
   { path: '**', redirectTo: '' }
 ];
 
