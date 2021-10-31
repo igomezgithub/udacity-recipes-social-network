@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -15,12 +16,15 @@
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
     "@angular/core": "~12.2.0",
+    "@angular/flex-layout": "^12.0.0-beta.35",
     "@angular/forms": "~12.2.0",
     "@angular/material": "^12.2.11",
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "material-design-icons": "^3.0.1",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.1.9",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

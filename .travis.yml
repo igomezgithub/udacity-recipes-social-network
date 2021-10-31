@@ -29,7 +29,9 @@ script:
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push "$DOCKER_USERNAME"/recipes-social-network-api-gateway:v1.01
-  - docker push "$DOCKER_USERNAME"/recipes-social-network-recipe-microservice:v1.01
-  - docker push "$DOCKER_USERNAME"/recipes-social-network-comment-microservice:v1.01
-  - docker push "$DOCKER_USERNAME"/recipes-social-network-user-microservice:v1.01
+  - docker push "$DOCKER_USERNAME"/recipes-social-network-reverseproxy:v1.03
+  - docker push "$DOCKER_USERNAME"/recipes-social-network-api-gateway:v1.03
+  - docker push "$DOCKER_USERNAME"/recipes-social-network-recipe-microservice:v1.03
+  - docker push "$DOCKER_USERNAME"/recipes-social-network-comment-microservice:v1.03
+  - docker push "$DOCKER_USERNAME"/recipes-social-network-user-microservice:v1.03
+  - docker push "$DOCKER_USERNAME"/recipes-social-network-frontend:v1.03

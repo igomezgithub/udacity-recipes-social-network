@@ -1,12 +1,25 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { env } from 'process';
 import { AppModule } from './app.module';
 import { AllExceptionFilter } from './common/filters/http-exception.filter';
 import { TimeOutInterceptor } from './common/interceptors/timeout.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // CORS configuration
+  app.enableCors({
+    allowedHeaders: [
+      'Origin', 'X-Requested-With',
+      'Content-Type', 'Accept',
+      'X-Access-Token', 'Authorization',
+    ],
+    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    credentials: false,
+    origin: '*'
+  });
+
   app.useGlobalFilters(new AllExceptionFilter());
   app.useGlobalInterceptors(new TimeOutInterceptor());
 
@@ -26,6 +39,8 @@ async function bootstrap() {
   });
 
   // App listen port
-  await app.listen(process.env.PORT || 3000);
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  console.log('Starting server in port ' + port);
 }
 bootstrap();

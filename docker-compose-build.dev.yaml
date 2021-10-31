@@ -2,17 +2,25 @@ version: "3"
 services:
   reverseproxy:
     build:
+      context: ./backend/reverseproxy
+    image: recipes-social-network-reverseproxy:v1.03
+  api-gateway:
+    build:
       context: ./backend/api-gateway
-    image: recipes-social-network-api-gateway:v1.01
+    image: recipes-social-network-api-gateway:v1.03
   recipe-microservice:
     build:
       context: ./backend/recipe-microservice
-    image: recipes-social-network-recipe-microservice:v1.01
+    image: recipes-social-network-recipe-microservice:v1.03
   comment-microservice:
     build:
       context: ./backend/comment-microservice
-    image: recipes-social-network-comment-microservice:v1.01
+    image: recipes-social-network-comment-microservice:v1.03
   user-microservice:
     build:
       context: ./backend/user-microservice
-    image: recipes-social-network-user-microservice:v1.01
+    image: recipes-social-network-user-microservice:v1.03
+  frontend:
+    build:
+      context: ./frontend/recipes-social-network
+    image: recipes-social-network-frontend:v1.03

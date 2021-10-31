@@ -15,7 +15,7 @@ spec:
         app: reverseproxy
     spec:
       containers:
-      - image: igomezdockerhub/recipes-social-network-api-gateway:v1.01
+      - image: igomezdockerhub/recipes-social-network-reverseproxy:v1.03
         name: reverseproxy
         imagePullPolicy: Always
         resources:
@@ -27,45 +27,4 @@ spec:
             cpu: "500m" 
         ports:
         - containerPort: 8080
-        env:
-        - name: AWS_PROFILE
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: AWS_PROFILE
-        - name: AWS_REGION
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: AWS_REGION
-        - name: JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: env-secret
-              key: JWT_SECRET
-        - name: APP_URL
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: APP_URL
-        - name: PORT
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: PORT
-        - name: AMQP_URL
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: AMQP_URL
-        - name: URI_MONGODB
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: URI_MONGODB
-        - name: EXPIRES_IN
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: EXPIRES_IN
       restartPolicy: Always
