@@ -24,9 +24,7 @@ spec:
             cpu: "250m"
           limits:
             memory: "1024Mi"
-            cpu: "500m" 
-        ports:
-        - containerPort: 8080
+            cpu: "500m"
         env:
         - name: AWS_PROFILE
           valueFrom:
