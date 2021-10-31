@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - image: mongo:latest
+        name: mongodb
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+        env:
+        - name: MONGO_DATA_DIR
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: MONGO_DATA_DIR
+        - name: MONGO_LOG_DIR
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: MONGO_LOG_DIR
+      restartPolicy: Always
