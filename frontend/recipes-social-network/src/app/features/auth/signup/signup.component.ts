@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { EditMode } from 'src/app/shared/enums/edit-mode.enum';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 
@@ -17,7 +16,6 @@ export class SignupComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
   error: string = '';
 
-  // private auth: AuthService,
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
