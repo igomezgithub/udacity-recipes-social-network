@@ -62,7 +62,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .example-element-diagram {
-  min-width: 80px;
+  min-width: 100px;
   border: 2px solid green;
   padding: 8px;
   font-weight: lighter;
@@ -84,3 +84,16 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 
+.button-primary {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  margin-top: 10px;
+  background-color: #61A635
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}

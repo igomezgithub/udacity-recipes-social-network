@@ -1,6 +1,6 @@
 import { SkillLevel } from "./skill-level.enum";
 
-export interface RecipeList {
+export interface RecipeItem {
   recipeName: string;
   readyIn: number;
   averageRaiting: number;

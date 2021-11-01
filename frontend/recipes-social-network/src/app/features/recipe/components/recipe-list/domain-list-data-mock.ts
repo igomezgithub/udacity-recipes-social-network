@@ -1,7 +1,7 @@
-import { RecipeList } from "../../models/recipe-list.interface";
+import { RecipeItem } from "../../models/recipe-item.interface";
 import { SkillLevel } from "../../models/skill-level.enum";
 
-const RECIPES_LIST_MOCK_DATA: RecipeList[] = [
+const RECIPES_LIST_MOCK_DATA: RecipeItem[] = [
   {
     recipeName: 'Cheesy Vegetarian Enchilada Casserole',
     readyIn: 35,
@@ -85,7 +85,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeList[] = [
  * Data source for the DomainList view.
  */
 export class DomainRecipeListConfiguration {
-  static get DATASOURCE(): RecipeList[] {
+  static get DATASOURCE(): RecipeItem[] {
     return RECIPES_LIST_MOCK_DATA;
   }
 }

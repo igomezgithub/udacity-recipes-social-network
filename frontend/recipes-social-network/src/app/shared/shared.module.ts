@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../ui-modules/material/material.module';
+import { DefaultListMenuComponent } from './components/default-list-menu/default-list-menu.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { MaterialModule } from '../ui-modules/material/material.module';
     LayoutModule,
     FlexLayoutModule
   ],
-  declarations: [ ],
+  declarations: [ DefaultListMenuComponent ],
   exports: [
     CommonModule,
     FormsModule,
@@ -24,7 +25,8 @@ import { MaterialModule } from '../ui-modules/material/material.module';
     RouterModule,
     ReactiveFormsModule,
     LayoutModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    DefaultListMenuComponent
   ],
   providers: [ ],
   entryComponents: [ ]

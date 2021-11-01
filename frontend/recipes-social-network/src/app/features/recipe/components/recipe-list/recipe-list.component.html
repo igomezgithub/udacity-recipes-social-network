@@ -45,6 +45,13 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="buttons">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <app-default-list-menu [menuType]="verticalMenuType" (openDialogEvent)="onActionEvent($event, element)"></app-default-list-menu>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
       class="example-element-row"
@@ -53,4 +60,8 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
+
+<div class="button-container">
+  <button mat-raised-button class="button-primary">New Recipe</button>
+</div>
 

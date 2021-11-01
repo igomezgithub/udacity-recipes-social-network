@@ -1,0 +1,31 @@
+<div fxLayoutAlign="end">
+  <button mat-icon-button [matMenuTriggerFor]="menuEditAndRemove">
+    <mat-icon matTooltip="More">more_vert</mat-icon>
+  </button>
+  <mat-menu #menuEditAndRemove="matMenu" yPosition="below" [overlapTrigger]="false">
+    <ng-container *ngIf="editButtonVisible">
+      <button mat-menu-item (click)="onEdit()">
+        <mat-icon class="icon">edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="changePasswordButtonVisible">
+      <button mat-menu-item (click)="onChangePassword()">
+        <mat-icon class="icon">vpn_key</mat-icon>
+        <span>Change password</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="downloadButtonVisible">
+      <button mat-menu-item (click)="onDownload()">
+        <mat-icon class="icon">vertical_align_bottom</mat-icon>
+        <span>Download</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="deleteButtonVisible">
+      <button mat-menu-item (click)="onDelete()">
+        <mat-icon class="icon">delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </ng-container>
+  </mat-menu>
+</div>
