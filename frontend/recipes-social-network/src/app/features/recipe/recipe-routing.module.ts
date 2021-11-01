@@ -10,10 +10,10 @@ const recipeRoutes: Routes = [
    { path: '', component: RecipePageComponent,
      canActivate: [AuthGuard],
      children: [
-      { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-      { path: '', component: RecipeListComponent,
+       { path: '', redirectTo: '/recipe', pathMatch: 'full' },
+       { path: '', component: RecipeListComponent,
   //       children: [
-  //         { path: 'list', component: RecipeListComponent },
+  //         { path: 'recipe-detail', component: RecipeDetailComponent },
   //         { path: 'new', component: RecipeItemComponent },
   //         {
   //           path: ':id',
@@ -26,9 +26,10 @@ const recipeRoutes: Routes = [
   //           //resolve: [RecipesResolverService]
   //         }
   //       ]
-       }
+      }
      ]
-  }
+  },
+  //{ path: 'recipe-detail', component: RecipeDetailComponent }
 ];
 
 @NgModule({

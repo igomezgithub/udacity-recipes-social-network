@@ -6,4 +6,6 @@ export interface RecipeItem {
   averageRaiting: number;
   skillLevel: SkillLevel;
   description: string;
+  imagePath?: string;
+  ingredients?: string[];
 }

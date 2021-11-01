@@ -3,6 +3,12 @@
     <mat-icon matTooltip="More">more_vert</mat-icon>
   </button>
   <mat-menu #menuEditAndRemove="matMenu" yPosition="below" [overlapTrigger]="false">
+    <ng-container *ngIf="openButtonVisible">
+      <button mat-menu-item (click)="onOpen()">
+        <mat-icon class="icon">open_in_browser</mat-icon>
+        <span>Open</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="editButtonVisible">
       <button mat-menu-item (click)="onEdit()">
         <mat-icon class="icon">edit</mat-icon>

@@ -17,12 +17,17 @@ export class DefaultListMenuComponent implements AfterContentInit {
 
   @Output() openDialogEvent: EventEmitter<OperationType> = new EventEmitter<OperationType>();
   @Input() menuType: OperationType = OperationType.None;
+  private _isVisibleOpenButton: boolean = false;
   private _isVisibleEditButton: boolean = false;
   private _isVisibleChangePasswordButton: boolean = false;
   private _isVisibleDownloadButton: boolean = false;
   private _isVisibleDeleteButton: boolean = false;
 
   constructor() {
+  }
+
+  public get openButtonVisible(): boolean {
+    return this._isVisibleOpenButton;
   }
 
   public get editButtonVisible(): boolean {
@@ -43,14 +48,15 @@ export class DefaultListMenuComponent implements AfterContentInit {
 
   public ngAfterContentInit(): void {
     if (this.menuType & OperationType.None) {
+      this._isVisibleOpenButton = false;
       this._isVisibleEditButton = false;
       this._isVisibleDeleteButton = false;
       this._isVisibleChangePasswordButton = false;
       this._isVisibleDownloadButton = false;
     }
 
-    if (this.menuType & OperationType.Add) {
-      // Currently this operation is outside the list menu
+    if (this.menuType & OperationType.Open) {
+      this._isVisibleOpenButton = true;
     }
     if (this.menuType & OperationType.Edit) {
       this._isVisibleEditButton = true;
@@ -66,30 +72,22 @@ export class DefaultListMenuComponent implements AfterContentInit {
     }
   }
 
-  /**
-   * This method throws an event to open the edit dialog.
-   */
+  public onOpen() {
+    this.openDialogEvent.emit(OperationType.Open);
+  }
+
   public onEdit() {
     this.openDialogEvent.emit(OperationType.Edit);
   }
 
-  /**
-   * This method throws an event to open the change password dialog.
-   */
   public onChangePassword() {
     this.openDialogEvent.emit(OperationType.ChangePassword);
   }
 
-  /**
-   * This method throws an event to open the change password dialog.
-   */
   public onDownload() {
     this.openDialogEvent.emit(OperationType.Download);
   }
 
-  /**
-   * This method throws an event to delete the current element selected.
-   */
   public onDelete() {
     this.openDialogEvent.emit(OperationType.Delete);
   }

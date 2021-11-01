@@ -3,6 +3,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { RecipeItem } from '../../models/recipe-item.interface';
 import { DomainRecipeListConfiguration } from './domain-list-data-mock';
 import { OperationType } from 'src/app/shared/enums/operation-type.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -28,8 +29,8 @@ export class RecipeListComponent implements OnInit {
   verticalMenuType: OperationType = OperationType.None;
   expandedElement: RecipeItem | null = null;
 
-  constructor() {
-    this.verticalMenuType = OperationType.Edit | OperationType.Delete;
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.verticalMenuType = OperationType.Open | OperationType.Edit | OperationType.Delete;
    }
 
   ngOnInit(): void {
@@ -37,6 +38,10 @@ export class RecipeListComponent implements OnInit {
 
   onActionEvent(openDialogType: OperationType, itemSelected: RecipeItem) {
     switch (openDialogType) {
+      case OperationType.Open: {
+        this.router.navigate(['/recipe-detail']);
+        break;
+      }
       case OperationType.Edit: {
         // this.openEditDomainDialog(itemSelected);
         break;
