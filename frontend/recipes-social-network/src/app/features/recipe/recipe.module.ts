@@ -17,11 +17,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
-    RecipeRoutingModule
+    // RecipeRoutingModule
   ],
   exports: [
     RecipePageComponent,
-    RecipeItemComponent
+    RecipeItemComponent,
+    RecipeDetailComponent
   ]
 })
 export class RecipeModule { }

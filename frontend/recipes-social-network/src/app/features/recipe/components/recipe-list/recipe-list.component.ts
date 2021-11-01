@@ -39,7 +39,7 @@ export class RecipeListComponent implements OnInit {
   onActionEvent(openDialogType: OperationType, itemSelected: RecipeItem) {
     switch (openDialogType) {
       case OperationType.Open: {
-        this.router.navigate(['/recipe-detail']);
+        this.router.navigate(['/recipe/detail']);
         break;
       }
       case OperationType.Edit: {

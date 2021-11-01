@@ -17,7 +17,7 @@ import { HomeRoutingModule } from './home-routing.module';
     CommonModule,
     RecipeModule,
     SharedModule,
-    HomeRoutingModule
+    // HomeRoutingModule
   ],
   exports: [
     HomePageComponent

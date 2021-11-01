@@ -7,29 +7,29 @@ import { RecipeListComponent } from './components/recipe-list/recipe-list.compon
 import { AuthGuard } from '../auth/services/auth.guard';
 
 const recipeRoutes: Routes = [
-   { path: '', component: RecipePageComponent,
-     canActivate: [AuthGuard],
-     children: [
-       { path: '', redirectTo: '/recipe', pathMatch: 'full' },
-       { path: '', component: RecipeListComponent,
-  //       children: [
-  //         { path: 'recipe-detail', component: RecipeDetailComponent },
-  //         { path: 'new', component: RecipeItemComponent },
-  //         {
-  //           path: ':id',
-  //           component: RecipeDetailComponent
-  //           //resolve: [RecipesResolverService]
-  //         },
-  //         {
-  //           path: ':id/edit',
-  //           component: RecipeItemComponent
-  //           //resolve: [RecipesResolverService]
-  //         }
-  //       ]
-      }
-     ]
-  },
-  //{ path: 'recipe-detail', component: RecipeDetailComponent }
+  //  { path: '', component: RecipePageComponent,
+  //    canActivate: [AuthGuard],
+  //    children: [
+  //      { path: '', redirectTo: '/recipe', pathMatch: 'full' },
+  //      { path: '', component: RecipeListComponent,
+  // //       children: [
+  // //         { path: 'recipe-detail', component: RecipeDetailComponent },
+  // //         { path: 'new', component: RecipeItemComponent },
+  // //         {
+  // //           path: ':id',
+  // //           component: RecipeDetailComponent
+  // //           //resolve: [RecipesResolverService]
+  // //         },
+  // //         {
+  // //           path: ':id/edit',
+  // //           component: RecipeItemComponent
+  // //           //resolve: [RecipesResolverService]
+  // //         }
+  // //       ]
+  //     }
+  //    ]
+  // },
+  // //{ path: 'recipe-detail', component: RecipeDetailComponent }
 ];
 
 @NgModule({
