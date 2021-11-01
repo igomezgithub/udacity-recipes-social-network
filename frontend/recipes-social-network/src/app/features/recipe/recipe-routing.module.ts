@@ -7,10 +7,11 @@ import { RecipeListComponent } from './components/recipe-list/recipe-list.compon
 import { AuthGuard } from '../auth/services/auth.guard';
 
 const recipeRoutes: Routes = [
-  // { path: '', component: RecipePageComponent,
-  //   canActivate: [AuthGuard],
-  //   children: [
-  //      { path: '', component: RecipeListComponent,
+   { path: '', component: RecipePageComponent,
+     canActivate: [AuthGuard],
+     children: [
+      { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+      { path: '', component: RecipeListComponent,
   //       children: [
   //         { path: 'list', component: RecipeListComponent },
   //         { path: 'new', component: RecipeItemComponent },
@@ -25,9 +26,9 @@ const recipeRoutes: Routes = [
   //           //resolve: [RecipesResolverService]
   //         }
   //       ]
-  //     }
-  //   ]
-  //}
+       }
+     ]
+  }
 ];
 
 @NgModule({
