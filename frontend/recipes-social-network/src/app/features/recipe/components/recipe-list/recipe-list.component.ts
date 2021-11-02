@@ -52,4 +52,8 @@ export class RecipeListComponent implements OnInit {
       }
     }
   }
+
+  onNewRecipeEvent() {
+    this.router.navigate(['/recipe/new']);
+  }
 }

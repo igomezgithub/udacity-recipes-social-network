@@ -1,3 +1,4 @@
+import { Ingredient } from "./ingredient.interface";
 import { SkillLevel } from "./skill-level.enum";
 
 export interface RecipeItem {
@@ -7,5 +8,5 @@ export interface RecipeItem {
   skillLevel: SkillLevel;
   description: string;
   imagePath?: string;
-  ingredients?: string[];
+  ingredients?: Ingredient[];
 }

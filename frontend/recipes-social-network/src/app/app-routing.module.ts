@@ -4,6 +4,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { SignupComponent } from './features/auth/signup/signup.component';
 import { HomePageComponent } from './features/home/pages/home-page.component';
 import { RecipeDetailComponent } from './features/recipe/components/recipe-detail/recipe-detail.component';
+import { RecipeEditComponent } from './features/recipe/components/recipe-edit/recipe-edit.component';
 import { RecipePageComponent } from './features/recipe/pages/recipe-page.component';
 
 // const appRoutes: Routes = [
@@ -20,7 +21,7 @@ const appRoutes: Routes = [
     children: [
       { path: '', component: RecipePageComponent },
       { path: 'detail', component: RecipeDetailComponent },
-      // { path: 'new', component: RecipeEditComponent },
+      { path: 'new', component: RecipeEditComponent },
       // {
       //   path: ':id',
       //   component: RecipeDetailComponent,

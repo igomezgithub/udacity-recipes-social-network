@@ -1,0 +1,163 @@
+
+<div class="container-card">
+  <form [formGroup]="recipeItemForm" (ngSubmit)="onSubmit()" class="container-form">
+    <mat-card class="card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title>
+          <mat-form-field class="full-width" appearance="fill">
+            <input matInput placeholder="Recipe Name" formControlName="name">
+            <mat-error *ngIf="geRecipeNameErrorMessage() !== null">{{geRecipeNameErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <mat-form-field appearance="fill">
+            <input matInput placeholder="Image Path" formControlName="imagePath">
+          </mat-form-field>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <div>
+        <img mat-card-image src="../../../../../assets/img/standard_recipe.jpg" alt="Photo of a Shiba Inu">
+      </div>
+      <mat-card-content>
+        <div class="content-footer">
+          <mat-form-field appearance="fill">
+            <input matInput placeholder="Ready In" formControlName="readyIn">
+            <span matSuffix>&nbsp; min</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-select placeholder="Skill Level" formControlName="skillLevel">
+              <mat-option *ngFor="let skillLevel of skillLevels" [value]="skillLevel.key">
+                {{ skillLevel.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <p>
+          <mat-form-field appearance="fill" style="min-width: 500px;">
+            <textarea matInput placeholder="Description" formControlName="description"></textarea>
+          </mat-form-field>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="button-container">
+          <button mat-raised-button class="button-primary">Save</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-form-field class="full-width" appearance="fill">
+            <input matInput placeholder="Recipe Name" formControlName="name">
+            <mat-error *ngIf="geRecipeNameErrorMessage() !== null">{{geRecipeNameErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <mat-form-field appearance="fill">
+            <input matInput placeholder="Image Path" formControlName="imagePath">
+          </mat-form-field>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </form>
+</div>
+
+
+
+<!-- <div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeItemForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!recipeItemForm.valid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image URL</label>
+            <input
+              type="text"
+              id="imagePath"
+              formControlName="imagePath"
+              class="form-control"
+              #imagePath>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="imagePath.value" class="img-responsive">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              type="text"
+              id="description"
+              class="form-control"
+              formControlName="description"
+              rows="6"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" formArrayName="ingredients">
+          <div
+            class="row"
+            *ngFor="let ingredientCtrl of getIngredientsControls(); let i = index"
+            [formGroupName]="i"
+            style="margin-top: 10px;">
+            <div class="col-xs-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name">
+            </div>
+            <div class="col-xs-2">
+              <input
+                type="number"
+                class="form-control"
+                formControlName="amount">
+            </div>
+            <div class="col-xs-2">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onDeleteIngredient(i)">X</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="onAddIngredient()">Add Ingredient</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> -->
