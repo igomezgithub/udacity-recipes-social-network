@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 
@@ -16,6 +16,7 @@ const ALL_SKILL_LEVELS: any[] = [
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent implements OnInit {
@@ -72,7 +73,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    //this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   private initForm() {
@@ -81,7 +82,9 @@ export class RecipeEditComponent implements OnInit {
     let readyIn: number | undefined = undefined;
     let skillLevel: SkillLevel | undefined = undefined;
     let recipeDescription = '';
-    let recipeIngredients: FormArray = new FormArray([]);
+    let recipeIngredients: string[] = [];
+    let ingredientName: string = '';
+    let ingredientAmount: string = '';
 
     if (this.editMode) {
       const recipe = this.recipeService.getRecipe(this.id);
@@ -90,19 +93,20 @@ export class RecipeEditComponent implements OnInit {
       readyIn = recipe.readyIn;
       skillLevel = recipe.skillLevel;
       recipeDescription = recipe.description;
-      if (recipe['ingredients']) {
-        for (let ingredient of recipe.ingredients) {
-          recipeIngredients.push(
-            new FormGroup({
-              name: new FormControl(ingredient.name, Validators.required),
-              amount: new FormControl(ingredient.amount, [
-                Validators.required,
-                Validators.pattern(/^[1-9]+[0-9]*$/)
-              ])
-            })
-          );
-        }
-      }
+
+      // if (recipe['ingredients']) {
+      //   for (let ingredient of recipe.ingredients) {
+      //     recipeIngredients.push(
+      //       new FormGroup({
+      //         name: new FormControl(ingredient.name),
+      //         amount: new FormControl(ingredient.amount, [
+      //           Validators.required,
+      //           Validators.pattern(/^[1-9]+[0-9]*$/)
+      //         ])
+      //       })
+      //     );
+      //   }
+      // }
     }
 
     this.recipeItemForm = new FormGroup({
@@ -111,9 +115,14 @@ export class RecipeEditComponent implements OnInit {
       readyIn: new FormControl(readyIn),
       skillLevel: new FormControl(skillLevel),
       description: new FormControl(recipeDescription, Validators.required),
-      ingredients: recipeIngredients
+      //ingredients: new FormControl(recipeDescription),
+      ingredients: new FormControl(recipeIngredients),
+      ingredientName: new FormControl(ingredientName),
+      ingredientAmount: new FormControl(ingredientAmount)
     });
-  }
+
+    //this.recipeItemForm.get('ingredients').disable();
+   }
 
   getIngredientsControls() {
     return (this.recipeItemForm.get('ingredients') as FormArray).controls;
@@ -125,5 +134,21 @@ export class RecipeEditComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+  onActivateIngredientButton(): boolean {
+    return !(this.recipeItemForm.get('ingredientName')?.value !== '' && this.recipeItemForm.get('ingredientAmount')?.value !== '');
+  }
+
+  onSaveIngredientAction() {
+    const previousValue: string = (this.recipeItemForm.get('ingredients')?.value === '') ? "" : this.recipeItemForm.get('ingredients')?.value;
+    const nextValue =
+      previousValue +
+      this.recipeItemForm.get('ingredientAmount')?.value +
+      " - " +
+      this.recipeItemForm.get('ingredientName')?.value +
+      "\n";
+
+    this.recipeItemForm.get('ingredients')?.setValue(nextValue);
   }
 }

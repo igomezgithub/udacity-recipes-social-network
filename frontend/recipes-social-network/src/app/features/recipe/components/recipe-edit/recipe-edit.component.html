@@ -39,27 +39,50 @@
           </mat-form-field>
         </p>
       </mat-card-content>
-      <mat-card-actions>
-        <div class="button-container">
-          <button mat-raised-button class="button-primary">Save</button>
-        </div>
-      </mat-card-actions>
     </mat-card>
 
     <mat-card class="card">
       <mat-card-header>
         <mat-card-title>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="Recipe Name" formControlName="name">
-            <mat-error *ngIf="geRecipeNameErrorMessage() !== null">{{geRecipeNameErrorMessage()}}</mat-error>
-          </mat-form-field>
+          <label>Ingredients:</label>
+          <div class="content-footer">
+            <mat-form-field class="ingredient-field" appearance="fill">
+              <input matInput placeholder="Amount" formControlName="ingredientAmount">
+            </mat-form-field>
+            <mat-form-field class="ingredient-field" appearance="fill">
+              <input matInput placeholder="Ingredient" formControlName="ingredientName">
+            </mat-form-field>
+            <div>
+              <button mat-raised-button class="button-secundary"
+                [disabled]="onActivateIngredientButton()"
+                (click)="onSaveIngredientAction()">Ingredient</button>
+            </div>
+          </div>
         </mat-card-title>
         <mat-card-subtitle>
           <mat-form-field appearance="fill">
-            <input matInput placeholder="Image Path" formControlName="imagePath">
+            <textarea matInput
+              formControlName="ingredients"
+              class="ingredients-textarea-medium">
+            </textarea>
           </mat-form-field>
+          <div style="padding-top: 20px;">
+            <label>Method:</label>
+            <mat-form-field appearance="fill">
+              <textarea matInput
+                formControlName="ingredients"
+                class="ingredients-textarea-large">
+              </textarea>
+            </mat-form-field>
+          </div>
+
         </mat-card-subtitle>
       </mat-card-header>
+      <mat-card-actions style="padding: 0 20px 10px 0;">
+        <div class="button-container">
+          <button mat-raised-button class="button-primary">Save</button>
+        </div>
+      </mat-card-actions>
     </mat-card>
   </form>
 </div>

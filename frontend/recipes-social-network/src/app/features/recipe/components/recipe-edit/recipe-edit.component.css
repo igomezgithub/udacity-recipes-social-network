@@ -54,6 +54,10 @@ mat-form-field {
   width: 100%;
 }
 
+.ingredient-field {
+  width: 142px;
+}
+
 /* .signup-full-width {
   padding-top: 10px;
 } */
@@ -63,4 +67,16 @@ mat-form-field {
   flex-direction: row;
   justify-content: flex-start;
   gap: 10px;
+}
+
+.ingredients-textarea-medium {
+  margin-top: -2px;
+  margin-bottom: -2px;
+  height: 149px;
+}
+
+.ingredients-textarea-large {
+  margin-top: -2px;
+  margin-bottom: -2px;
+  height: 280px;
 }
