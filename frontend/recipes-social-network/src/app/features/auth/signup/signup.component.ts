@@ -105,7 +105,7 @@ export class SignupComponent implements OnInit {
 
     this.auth.register(newuser, this.registerForm.controls.password.value)
       .then((token: any) => {
-        this.router.navigate(['/recipes']);
+        this.router.navigate(['/recipe']);
       })
       .catch((e) => {
         this.error = e.statusText;
