@@ -53,7 +53,7 @@
               <input matInput placeholder="Ingredient" formControlName="ingredientName">
             </mat-form-field>
             <div>
-              <button mat-raised-button class="button-secundary"
+              <button mat-raised-button type="button" class="button-secundary"
                 [disabled]="onActivateIngredientButton()"
                 (click)="onSaveIngredientAction()">Ingredient</button>
             </div>
@@ -70,7 +70,7 @@
             <label>Method:</label>
             <mat-form-field appearance="fill">
               <textarea matInput
-                formControlName="ingredients"
+                formControlName="method"
                 class="ingredients-textarea-large">
               </textarea>
             </mat-form-field>
@@ -80,7 +80,7 @@
       </mat-card-header>
       <mat-card-actions style="padding: 0 20px 10px 0;">
         <div class="button-container">
-          <button mat-raised-button class="button-primary">Save</button>
+          <button mat-raised-button type="submit" class="button-primary">Save</button>
         </div>
       </mat-card-actions>
     </mat-card>

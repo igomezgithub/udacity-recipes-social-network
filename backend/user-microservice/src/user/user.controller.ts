@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { ConsoleLogger, Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { UserMSG } from './common/constants';
 import { UserDTO } from './dto/user.dto';
@@ -6,6 +6,7 @@ import { UserService } from './user.service';
 
 @Controller()
 export class UserController {
+    private readonly logger = new ConsoleLogger(UserController.name);
     constructor(private readonly userService: UserService) { };
 
     @MessagePattern(UserMSG.CREATE)
@@ -36,7 +37,11 @@ export class UserController {
     @MessagePattern(UserMSG.VALID_USER)
     async validateUser(@Payload() payload: any): Promise<any> {
         const user = await this.userService.findByUsername(payload.username);
+        
+        this.logger.debug('The user is: ', user);
 
+        this.logger.debug('Password from UI: ', payload.password);
+        this.logger.debug('Password from MongoDB: ', user.password);
         const isValidPassword = await this.userService.checkPassword(payload.password, user.password);
 
         if(user && isValidPassword) return user;

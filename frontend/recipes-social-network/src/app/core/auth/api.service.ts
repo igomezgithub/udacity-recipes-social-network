@@ -25,7 +25,7 @@ export class ApiService {
   }
 
   setAuthToken(token: string) {
-    this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `jwt ${token}`);
+    // this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `Bearer ${token}`);
     this.token = token;
   }
 
@@ -44,7 +44,12 @@ export class ApiService {
   async post(endpoint: any, data: any): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
     console.log('URL: ', url);
-    return await this.http.post<HttpEvent<any>>(url, data, this.httpOptions)
+    return await this.http.post<HttpEvent<any>>(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }
+    })
             .toPromise()
             .catch((e: any) => {
               console.log('Post Error: ', e);

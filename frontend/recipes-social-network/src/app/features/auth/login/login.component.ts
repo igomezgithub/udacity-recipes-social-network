@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(this.loginForm.controls.username.value, this.loginForm.controls.password.value)
       .then((token: any) => {
-        this.router.navigate(['/recipe']);
+        this.router.navigate(['/recipes']);
       })
       .catch((e) => {
         this.error = e.statusText;

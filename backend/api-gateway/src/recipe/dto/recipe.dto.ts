@@ -1,12 +1,31 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, ValidateIf } from "class-validator";
-
+import { IsNotEmpty, IsNumber, IsString, ValidateIf } from "class-validator";
 
 export class RecipeDTO {
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
-    readonly title: string;
+    readonly recipeName: string;
+
+    @ApiProperty()
+    @IsString()
+    readonly url: string;
+
+    @ApiProperty()
+    @IsNumber()
+    readonly readyIn: number;
+
+    @ApiProperty()
+    @IsNumber()
+    readonly averageRaiting: number;
+
+    @ApiProperty()
+    @IsString()
+    readonly skillLevel: string;
+    
+    @ApiProperty()
+    @IsString()
+    readonly description: string;
 
     @ApiProperty()
     @IsNotEmpty()
@@ -17,8 +36,4 @@ export class RecipeDTO {
     @IsNotEmpty()
     @IsString()
     readonly ingredients: string;
-    
-    @ApiProperty()
-    @IsString()
-    readonly url: string;
 }

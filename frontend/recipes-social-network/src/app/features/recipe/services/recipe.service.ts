@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ApiService } from 'src/app/core/auth/api.service';
 import { Ingredient } from '../models/ingredient.interface';
-import { RecipeItem } from '../models/recipe-item.interface';
+import { RecipeDto } from '../models/recipe-dto.interface';
+import { RecipeViewModel } from '../models/recipe-view-model.interface';
+import { SkillLevel } from '../models/skill-level.enum';
 
 @Injectable()
 export class RecipeService {
-  recipesChanged = new Subject<RecipeItem[]>();
+  recipesChanged = new Subject<RecipeViewModel[]>();
 
   // private recipes: Recipe[] = [
   //   new Recipe(
@@ -21,11 +24,11 @@ export class RecipeService {
   //     [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]
   //   )
   // ];
-  private recipes: RecipeItem[] = [];
+  private recipes: RecipeViewModel[] = [];
 
-  constructor() {}
+  constructor(private api: ApiService) {}
 
-  setRecipes(recipes: RecipeItem[]) {
+  setRecipes(recipes: RecipeViewModel[]) {
     this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
   }
@@ -42,12 +45,23 @@ export class RecipeService {
     //this.slService.addIngredients(ingredients);
   }
 
-  addRecipe(recipe: RecipeItem) {
+  addRecipeAndUpdateList(recipe: RecipeViewModel) {
+    const recipeToSave: RecipeDto = {
+      recipeName: recipe.name,
+      imagePath: recipe.imagePath,
+      readyIn: recipe.readyIn,
+      averageRaiting: 0,
+      skillLevel: SkillLevel[recipe.skillLevel],
+      description: recipe.description,
+      method: recipe.method,
+      ingredients: recipe.ingredients
+    };
+    this.addRecipe(recipeToSave);
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  updateRecipe(index: number, newRecipe: RecipeItem) {
+  updateRecipe(index: number, newRecipe: RecipeViewModel) {
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());
   }
@@ -55,5 +69,14 @@ export class RecipeService {
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
+  }
+
+  private async addRecipe(recipe: RecipeDto): Promise<any> {
+    return this.api.post('/recipes', recipe)
+      .then((res) => {
+        console.log('The recipe saved is: ', res)
+        return res;
+      })
+      .catch((e) => { throw e; });
   }
 }

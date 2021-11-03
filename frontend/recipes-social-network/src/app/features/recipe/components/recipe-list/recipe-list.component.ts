@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { RecipeItem } from '../../models/recipe-item.interface';
 import { DomainRecipeListConfiguration } from './domain-list-data-mock';
 import { OperationType } from 'src/app/shared/enums/operation-type.enum';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RecipeViewModel } from '../../models/recipe-view-model.interface';
 
 @Component({
   selector: 'app-recipe-list',
@@ -19,15 +19,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RecipeListComponent implements OnInit {
   dataSource = DomainRecipeListConfiguration.DATASOURCE;
-  columnsToDisplay = ['recipeName', 'readyIn', 'averageRaiting', 'skillLevel', 'buttons'];
+  columnsToDisplay = ['name', 'readyIn', 'averageRaiting', 'skillLevel', 'buttons'];
   titleColumns = [
-    { title: 'Recipe Name', field: 'recipeName' },
+    { title: 'Recipe Name', field: 'name' },
     { title: 'Ready In', field: 'readyIn' },
     { title: 'Average Raiting', field: 'averageRaiting' },
     { title: 'Skill Level', field: 'skillLevel' }
   ];
   verticalMenuType: OperationType = OperationType.None;
-  expandedElement: RecipeItem | null = null;
+  expandedElement: RecipeViewModel | null = null;
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.verticalMenuType = OperationType.Open | OperationType.Edit | OperationType.Delete;
@@ -36,10 +36,10 @@ export class RecipeListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onActionEvent(openDialogType: OperationType, itemSelected: RecipeItem) {
+  onActionEvent(openDialogType: OperationType, itemSelected: RecipeViewModel) {
     switch (openDialogType) {
       case OperationType.Open: {
-        this.router.navigate(['/recipe/detail']);
+        this.router.navigate(['/recipes/detail']);
         break;
       }
       case OperationType.Edit: {
@@ -54,6 +54,6 @@ export class RecipeListComponent implements OnInit {
   }
 
   onNewRecipeEvent() {
-    this.router.navigate(['/recipe/new']);
+    this.router.navigate(['/recipes/new']);
   }
 }

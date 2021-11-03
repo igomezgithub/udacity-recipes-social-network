@@ -1,9 +1,13 @@
 import { IComment } from "./comment.interface";
 
 export interface IRecipe extends Document {
-    title: string;
+    recipeName: string;
+    url: string;
+    readyIn: number;
+    averageRaiting: number;
+    skillLevel: string;
+    description: string;
     method: string;
     ingredients: string;
-    url: string;
     comments: IComment[];
 }

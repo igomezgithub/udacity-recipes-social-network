@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormArray, Validators, FormGroupDirective, NgFo
 
 import { RecipeService } from '../../services/recipe.service';
 import { SkillLevel } from '../../models/skill-level.enum';
+import { RecipeDto } from '../../models/recipe-dto.interface';
 
 const ALL_SKILL_LEVELS: any[] = [
   { key: SkillLevel.None, value: '' },
@@ -51,26 +52,26 @@ export class RecipeEditComponent implements OnInit {
     if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipeItemForm.value);
     } else {
-      this.recipeService.addRecipe(this.recipeItemForm.value);
+      this.recipeService.addRecipeAndUpdateList(this.recipeItemForm.value);
     }
     this.onCancel();
   }
 
-  onAddIngredient() {
-    (<FormArray>this.recipeItemForm.get('ingredients')).push(
-      new FormGroup({
-        name: new FormControl(null, Validators.required),
-        amount: new FormControl(null, [
-          Validators.required,
-          Validators.pattern(/^[1-9]+[0-9]*$/)
-        ])
-      })
-    );
-  }
+  // onAddIngredient() {
+  //   (<FormArray>this.recipeItemForm.get('ingredients')).push(
+  //     new FormGroup({
+  //       name: new FormControl(null, Validators.required),
+  //       amount: new FormControl(null, [
+  //         Validators.required,
+  //         Validators.pattern(/^[1-9]+[0-9]*$/)
+  //       ])
+  //     })
+  //   );
+  // }
 
-  onDeleteIngredient(index: number) {
-    (<FormArray>this.recipeItemForm.get('ingredients')).removeAt(index);
-  }
+  // onDeleteIngredient(index: number) {
+  //   (<FormArray>this.recipeItemForm.get('ingredients')).removeAt(index);
+  // }
 
   onCancel() {
     //this.router.navigate(['../'], { relativeTo: this.route });
@@ -82,17 +83,19 @@ export class RecipeEditComponent implements OnInit {
     let readyIn: number | undefined = undefined;
     let skillLevel: SkillLevel | undefined = undefined;
     let recipeDescription = '';
-    let recipeIngredients: string[] = [];
+    let recipeIngredients: string = '';
     let ingredientName: string = '';
     let ingredientAmount: string = '';
+    let method: string = '';
 
     if (this.editMode) {
       const recipe = this.recipeService.getRecipe(this.id);
-      recipeName = recipe.recipeName;
+      recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
       readyIn = recipe.readyIn;
       skillLevel = recipe.skillLevel;
       recipeDescription = recipe.description;
+      method = recipe.description;
 
       // if (recipe['ingredients']) {
       //   for (let ingredient of recipe.ingredients) {
@@ -115,18 +118,18 @@ export class RecipeEditComponent implements OnInit {
       readyIn: new FormControl(readyIn),
       skillLevel: new FormControl(skillLevel),
       description: new FormControl(recipeDescription, Validators.required),
-      //ingredients: new FormControl(recipeDescription),
       ingredients: new FormControl(recipeIngredients),
       ingredientName: new FormControl(ingredientName),
-      ingredientAmount: new FormControl(ingredientAmount)
+      ingredientAmount: new FormControl(ingredientAmount),
+      method: new FormControl(method)
     });
 
     //this.recipeItemForm.get('ingredients').disable();
    }
 
-  getIngredientsControls() {
-    return (this.recipeItemForm.get('ingredients') as FormArray).controls;
-  }
+  // getIngredientsControls() {
+  //   return (this.recipeItemForm.get('ingredients') as FormArray).controls;
+  // }
 
   geRecipeNameErrorMessage() {
     if (this.recipeItemForm.controls.name.hasError('required')) {

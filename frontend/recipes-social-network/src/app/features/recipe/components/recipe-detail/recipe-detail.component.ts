@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeItem } from '../../models/recipe-item.interface';
+import { RecipeViewModel } from '../../models/recipe-view-model.interface';
 import { SkillLevel } from '../../models/skill-level.enum';
 
 @Component({
@@ -8,15 +8,17 @@ import { SkillLevel } from '../../models/skill-level.enum';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  recipe: RecipeItem = {
-    recipeName: '',
+  id: number = 0;
+  recipe: RecipeViewModel = {
+    name: '',
+    imagePath: '',
     readyIn: 0,
     averageRaiting: 0,
     skillLevel: SkillLevel.Easy,
     description: '',
-    imagePath: '',
-    ingredients: [] };
-    id: number = 0;
+    method: '',
+    ingredients: ''
+  };
 
   constructor() { }
 

@@ -12,8 +12,10 @@ export class RecipeService {
     constructor(@InjectModel(RECIPE.name) private readonly model: Model<IRecipe>) { }
 
     async create(recipeDTO: RecipeDTO): Promise<IRecipe> {
-        this.logger.debug('Create service');
+        this.logger.debug('This is the recipe to create: ', recipeDTO);
         const newRecipe = new this.model(recipeDTO);
+
+        this.logger.debug('A new recipe to save is: ', newRecipe);
         return await newRecipe.save();
     }
 
