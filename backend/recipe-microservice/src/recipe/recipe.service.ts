@@ -24,12 +24,6 @@ export class RecipeService {
         return await this.model.find().populate('comments');
     }
 
-    assign ({title, method, ingredients, url, comments }: IRecipe): IRecipe {
-        return Object.assign({
-            title, method, ingredients, url, comments
-        });
-    }
-
     async findOne(id: string): Promise<IRecipe> {
         this.logger.debug('Find One service');
         const recipe = await (await this.model.findById(id)).populated('comments');

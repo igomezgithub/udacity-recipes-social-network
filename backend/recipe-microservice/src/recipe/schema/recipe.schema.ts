@@ -17,5 +17,3 @@ export const RecipeSchema = new mongoose.Schema(
         timestamps: true 
     }
 );
-
-RecipeSchema.index({ recipeName: 1 }, { unique: true});
