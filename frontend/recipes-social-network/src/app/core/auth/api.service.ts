@@ -19,11 +19,6 @@ export class ApiService {
     alert(error.message);
   }
 
-  static extractData(res: HttpEvent<any>) {
-    const body = res;
-    return body || { };
-  }
-
   setAuthToken(token: string) {
     // this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `Bearer ${token}`);
     this.token = token;
@@ -31,7 +26,12 @@ export class ApiService {
 
   async get(endpoint: any): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
-    const request = this.http.get(url, this.httpOptions).pipe(map(() => ApiService.extractData));
+    const request = this.http.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }
+    });
 
     return await request
             .toPromise()

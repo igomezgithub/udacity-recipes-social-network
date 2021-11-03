@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DomainRecipeListConfiguration } from './domain-list-data-mock';
 import { OperationType } from 'src/app/shared/enums/operation-type.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeViewModel } from '../../models/recipe-view-model.interface';
+import { Subscription } from 'rxjs';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -17,7 +19,8 @@ import { RecipeViewModel } from '../../models/recipe-view-model.interface';
     ]),
   ],
 })
-export class RecipeListComponent implements OnInit {
+export class RecipeListComponent implements OnInit, OnDestroy {
+  recipes: RecipeViewModel[] = [];
   dataSource = DomainRecipeListConfiguration.DATASOURCE;
   columnsToDisplay = ['name', 'readyIn', 'averageRaiting', 'skillLevel', 'buttons'];
   titleColumns = [
@@ -28,12 +31,24 @@ export class RecipeListComponent implements OnInit {
   ];
   verticalMenuType: OperationType = OperationType.None;
   expandedElement: RecipeViewModel | null = null;
+  subscription: Subscription = new Subscription();
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) {
     this.verticalMenuType = OperationType.Open | OperationType.Edit | OperationType.Delete;
    }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.subscription = this.recipeService.recipesChanged
+      .subscribe(
+        (recipes: RecipeViewModel[]) => {
+          this.recipes = recipes;
+        }
+      );
+    this.recipeService.getRecipes();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onActionEvent(openDialogType: OperationType, itemSelected: RecipeViewModel) {

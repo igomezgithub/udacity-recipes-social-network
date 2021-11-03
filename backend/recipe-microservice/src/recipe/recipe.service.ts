@@ -20,7 +20,7 @@ export class RecipeService {
     }
 
     async findAll(): Promise<IRecipe[]> {
-        this.logger.debug('Find All service');
+        this.logger.debug('Find All recipes');
         return await this.model.find().populate('comments');
     }
 

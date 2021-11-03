@@ -10,20 +10,6 @@ import { SkillLevel } from '../models/skill-level.enum';
 export class RecipeService {
   recipesChanged = new Subject<RecipeViewModel[]>();
 
-  // private recipes: Recipe[] = [
-  //   new Recipe(
-  //     'Tasty Schnitzel',
-  //     'A super-tasty Schnitzel - just awesome!',
-  //     'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
-  //     [new Ingredient('Meat', 1), new Ingredient('French Fries', 20)]
-  //   ),
-  //   new Recipe(
-  //     'Big Fat Burger',
-  //     'What else you need to say?',
-  //     'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
-  //     [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]
-  //   )
-  // ];
   private recipes: RecipeViewModel[] = [];
 
   constructor(private api: ApiService) {}
@@ -33,8 +19,10 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  getRecipes() {
-    return this.recipes.slice();
+  async getRecipes(): Promise<void> {
+    const recipesDto: RecipeDto[] = await this.updateRecipeList();
+    this.recipes = this.recipesDtoToViewModel(recipesDto);
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   getRecipe(index: number) {
@@ -46,16 +34,7 @@ export class RecipeService {
   }
 
   addRecipeAndUpdateList(recipe: RecipeViewModel) {
-    const recipeToSave: RecipeDto = {
-      recipeName: recipe.name,
-      imagePath: recipe.imagePath,
-      readyIn: recipe.readyIn,
-      averageRaiting: 0,
-      skillLevel: SkillLevel[recipe.skillLevel],
-      description: recipe.description,
-      method: recipe.method,
-      ingredients: recipe.ingredients
-    };
+    const recipeToSave: RecipeDto = this.recipeViewModelToRecipeDto(recipe);
     this.addRecipe(recipeToSave);
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
@@ -78,5 +57,49 @@ export class RecipeService {
         return res;
       })
       .catch((e) => { throw e; });
+  }
+
+  private async updateRecipeList(): Promise<RecipeDto[]> {
+    return await this.api.get('/recipes')
+      .then((req: any) => {
+        console.log('All recipes: ', req)
+        return req;
+      })
+      .catch((e) => { throw e; });
+  }
+
+  private recipeViewModelToRecipeDto(recipe: RecipeViewModel): RecipeDto {
+    return  {
+      recipeName: recipe.name,
+      imagePath: recipe.imagePath,
+      readyIn: recipe.readyIn,
+      averageRaiting: 0,
+      skillLevel: SkillLevel[recipe.skillLevel],
+      description: recipe.description,
+      method: recipe.method,
+      ingredients: recipe.ingredients
+    } as RecipeDto;
+  }
+
+  private recipeDtoToRecipeViewModel(recipe: RecipeDto): RecipeViewModel {
+    return  {
+      name: recipe.recipeName,
+      imagePath: recipe.imagePath,
+      readyIn: recipe.readyIn,
+      averageRaiting: 0,
+      skillLevel: SkillLevel[recipe.recipeName as keyof typeof SkillLevel],
+      description: recipe.description,
+      method: recipe.method,
+      ingredients: recipe.ingredients
+    } as RecipeViewModel;
+  }
+
+  private recipesDtoToViewModel(recipesDto: RecipeDto[]): RecipeViewModel[] {
+    const recipesViewModel: RecipeViewModel[] = [];
+    recipesDto.forEach((recipeDto: RecipeDto) => {
+      recipesViewModel.push(this.recipeDtoToRecipeViewModel(recipeDto));
+    });
+
+    return recipesViewModel;
   }
 }
