@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: comment-microservice
-        image: igomezdockerhub/recipes-social-network-comment-microservice:v1.03
+        image: igomezdockerhub/recipes-social-network-comment-microservice:v1.04
         imagePullPolicy: Always
         resources:
           requests:

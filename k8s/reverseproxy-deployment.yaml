@@ -15,7 +15,7 @@ spec:
         app: reverseproxy
     spec:
       containers:
-      - image: igomezdockerhub/recipes-social-network-reverseproxy:v1.03
+      - image: igomezdockerhub/recipes-social-network-reverseproxy:v1.04
         name: reverseproxy
         imagePullPolicy: Always
         resources:
