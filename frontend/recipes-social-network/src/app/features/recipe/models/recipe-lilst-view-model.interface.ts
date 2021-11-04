@@ -1,12 +1,11 @@
 import { Ingredient } from "./ingredient.interface";
-import { SkillLevel } from "./skill-level.enum";
 
-export interface RecipeViewModel {
+export interface RecipeListViewModel {
   name: string;
   imagePath?: string;
   readyIn: number;
   averageRaiting: number;
-  skillLevel: SkillLevel;
+  skillLevel: string;
   description: string;
   method?: string;
   ingredients?: string;

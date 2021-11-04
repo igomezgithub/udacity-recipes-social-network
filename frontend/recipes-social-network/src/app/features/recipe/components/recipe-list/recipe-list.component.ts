@@ -3,9 +3,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { DomainRecipeListConfiguration } from './domain-list-data-mock';
 import { OperationType } from 'src/app/shared/enums/operation-type.enum';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RecipeViewModel } from '../../models/recipe-view-model.interface';
 import { Subscription } from 'rxjs';
 import { RecipeService } from '../../services/recipe.service';
+import { RecipeListViewModel } from '../../models/recipe-lilst-view-model.interface';
+import { RecipeDto } from '../../models/recipe-dto.interface';
 
 @Component({
   selector: 'app-recipe-list',
@@ -20,7 +21,7 @@ import { RecipeService } from '../../services/recipe.service';
   ],
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
-  recipes: RecipeViewModel[] = [];
+  recipes: RecipeListViewModel[] = [];
   dataSource = DomainRecipeListConfiguration.DATASOURCE;
   columnsToDisplay = ['name', 'readyIn', 'averageRaiting', 'skillLevel', 'buttons'];
   titleColumns = [
@@ -30,7 +31,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     { title: 'Skill Level', field: 'skillLevel' }
   ];
   verticalMenuType: OperationType = OperationType.None;
-  expandedElement: RecipeViewModel | null = null;
+  expandedElement: RecipeListViewModel | null = null;
   subscription: Subscription = new Subscription();
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) {
@@ -40,8 +41,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.recipeService.recipesChanged
       .subscribe(
-        (recipes: RecipeViewModel[]) => {
-          this.recipes = recipes;
+        (recipes: RecipeDto[]) => {
+          this.recipes = this.recipesListDtoToViewModel(recipes);
         }
       );
     this.recipeService.getRecipes();
@@ -51,7 +52,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onActionEvent(openDialogType: OperationType, itemSelected: RecipeViewModel) {
+  onActionEvent(openDialogType: OperationType, itemSelected: RecipeListViewModel) {
     switch (openDialogType) {
       case OperationType.Open: {
         this.router.navigate(['/recipes/detail']);
@@ -70,5 +71,27 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   onNewRecipeEvent() {
     this.router.navigate(['/recipes/new']);
+  }
+
+  private recipeDtoToRecipeListViewModel(recipe: RecipeDto): RecipeListViewModel {
+    return  {
+      name: recipe.recipeName,
+      imagePath: recipe.imagePath,
+      readyIn: recipe.readyIn,
+      averageRaiting: 0,
+      skillLevel: recipe.skillLevel,
+      description: recipe.description,
+      method: recipe.method,
+      ingredients: recipe.ingredients
+    } as RecipeListViewModel;
+  }
+
+  private recipesListDtoToViewModel(recipesDto: RecipeDto[]): RecipeListViewModel[] {
+    const recipesViewModel: RecipeListViewModel[] = [];
+    recipesDto.forEach((recipeDto: RecipeDto) => {
+      recipesViewModel.push(this.recipeDtoToRecipeListViewModel(recipeDto));
+    });
+
+    return recipesViewModel;
   }
 }

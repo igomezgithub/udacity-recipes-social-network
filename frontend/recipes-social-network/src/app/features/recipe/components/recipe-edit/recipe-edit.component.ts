@@ -4,6 +4,8 @@ import { FormGroup, FormControl, FormArray, Validators, FormGroupDirective, NgFo
 
 import { RecipeService } from '../../services/recipe.service';
 import { SkillLevel } from '../../models/skill-level.enum';
+import { RecipeEditViewModel } from '../../models/recipe-edit-view-model.interface';
+import { RecipeDto } from '../../models/recipe-dto.interface';
 
 const ALL_SKILL_LEVELS: any[] = [
   { key: SkillLevel.None, value: '' },
@@ -46,7 +48,8 @@ export class RecipeEditComponent implements OnInit {
     if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipeItemForm.value);
     } else {
-      this.recipeService.addRecipeAndUpdateList(this.recipeItemForm.value);
+      const newRecipe: RecipeDto = this.recipeViewModelToRecipeDto(this.recipeItemForm.value);
+      this.recipeService.addRecipeAndUpdateList(newRecipe);
     }
     this.onCancel();
   }
@@ -67,13 +70,13 @@ export class RecipeEditComponent implements OnInit {
     let method: string = '';
 
     if (this.editMode) {
-      const recipe = this.recipeService.getRecipe(this.id);
-      recipeName = recipe.name;
-      recipeImagePath = recipe.imagePath;
-      readyIn = recipe.readyIn;
-      skillLevel = recipe.skillLevel;
-      recipeDescription = recipe.description;
-      method = recipe.description;
+      // const recipe = this.recipeService.getRecipe(this.id);
+      // recipeName = recipe.name;
+      // recipeImagePath = recipe.imagePath;
+      // readyIn = recipe.readyIn;
+      // skillLevel = recipe.skillLevel;
+      // recipeDescription = recipe.description;
+      // method = recipe.description;
     }
 
     this.recipeItemForm = new FormGroup({
@@ -111,5 +114,18 @@ export class RecipeEditComponent implements OnInit {
       "\n";
 
     this.recipeItemForm.get('ingredients')?.setValue(nextValue);
+  }
+
+  private recipeViewModelToRecipeDto(recipe: RecipeEditViewModel): RecipeDto {
+    return  {
+      recipeName: recipe.name,
+      imagePath: recipe.imagePath,
+      readyIn: recipe.readyIn,
+      averageRaiting: 0,
+      skillLevel: SkillLevel[recipe.skillLevel],
+      description: recipe.description,
+      method: recipe.method,
+      ingredients: recipe.ingredients
+    } as RecipeDto;
   }
 }

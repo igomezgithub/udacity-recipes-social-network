@@ -1,7 +1,7 @@
-import { RecipeViewModel } from "../../models/recipe-view-model.interface";
+import { RecipeEditViewModel } from "../../models/recipe-edit-view-model.interface";
 import { SkillLevel } from "../../models/skill-level.enum";
 
-const RECIPES_LIST_MOCK_DATA: RecipeViewModel[] = [
+const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
   {
     name: 'Cheesy Vegetarian Enchilada Casserole',
     imagePath: '',
@@ -115,7 +115,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeViewModel[] = [
  * Data source for the DomainList view.
  */
 export class DomainRecipeListConfiguration {
-  static get DATASOURCE(): RecipeViewModel[] {
+  static get DATASOURCE(): RecipeEditViewModel[] {
     return RECIPES_LIST_MOCK_DATA;
   }
 }
