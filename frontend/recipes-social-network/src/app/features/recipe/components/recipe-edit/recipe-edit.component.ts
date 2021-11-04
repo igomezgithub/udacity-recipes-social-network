@@ -8,7 +8,6 @@ import { RecipeEditViewModel } from '../../models/recipe-edit-view-model.interfa
 import { RecipeDto } from '../../models/recipe-dto.interface';
 
 const ALL_SKILL_LEVELS: any[] = [
-  { key: SkillLevel.None, value: '' },
   { key: SkillLevel.Beginner, value: 'Beginner' },
   { key: SkillLevel.Easy, value: 'Easy' },
   { key: SkillLevel.Intermediate, value: 'Intermediate' },
@@ -35,7 +34,7 @@ export class RecipeEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
-      this.editMode = params['id'] !== '';
+      this.editMode = params['id'] != undefined;
       this.initForm();
     });
   }
@@ -59,16 +58,16 @@ export class RecipeEditComponent implements OnInit {
   }
 
   private initForm() {
-    let id = '';
-    let recipeName = '';
+    let id: string | undefined = undefined;
+    let recipeName: string = '';
     let recipeImagePath: string | undefined = undefined;
-    let readyIn: number | undefined = undefined;
+    let readyIn: number = 0;
     let skillLevel: SkillLevel | undefined = undefined;
-    let recipeDescription = '';
-    let recipeIngredients: string | undefined = undefined;
+    let recipeDescription: string | undefined = undefined;
+    let recipeIngredients: string = '';
     let ingredientName: string = '';
     let ingredientAmount: string = '';
-    let method: string | undefined = undefined;
+    let method: string = '';
 
     if (this.editMode) {
       const recipeSelected: RecipeEditViewModel = this.recipeDtoToRecipeListViewModel(this.recipeService.getRecipe(this.id));
@@ -86,15 +85,15 @@ export class RecipeEditComponent implements OnInit {
       id: new FormControl(id),
       name: new FormControl(recipeName, Validators.required),
       imagePath: new FormControl(recipeImagePath),
-      readyIn: new FormControl(readyIn),
-      skillLevel: new FormControl(skillLevel),
-      description: new FormControl(recipeDescription, Validators.required),
-      ingredients: new FormControl(recipeIngredients),
+      readyIn: new FormControl(readyIn, Validators.required),
+      skillLevel: new FormControl(skillLevel, [Validators.required]),
+      description: new FormControl(recipeDescription),
+      ingredients: new FormControl(recipeIngredients, Validators.required),
       ingredientName: new FormControl(ingredientName),
       ingredientAmount: new FormControl(ingredientAmount),
-      method: new FormControl(method)
+      method: new FormControl(method, Validators.required)
     });
-   }
+  }
 
   geRecipeNameErrorMessage() {
     if (this.recipeItemForm.controls.name.hasError('required')) {

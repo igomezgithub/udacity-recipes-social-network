@@ -23,17 +23,8 @@ const appRoutes: Routes = [
     children: [
       { path: '', component: RecipePageComponent },
       { path: 'detail', component: RecipeDetailComponent },
-      { path: 'edit/:id', component: RecipeEditComponent },
-      // {
-      //   path: ':id',
-      //   component: RecipeDetailComponent,
-      //   resolve: [RecipesResolverService]
-      // },
-      // {
-      //   path: ':id/edit',
-      //   component: RecipeEditComponent,
-      //   resolve: [RecipesResolverService]
-      // }
+      { path: 'new', component: RecipeEditComponent },
+      { path: 'edit/:id', component: RecipeEditComponent }
     ]
   },
   { path: 'auth/signin', component: LoginComponent },

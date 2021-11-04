@@ -35,7 +35,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) {
-    this.verticalMenuType = OperationType.Open | OperationType.Edit | OperationType.Delete;
+    this.verticalMenuType = OperationType.Edit | OperationType.Delete;
    }
 
   ngOnInit() {
@@ -54,10 +54,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   onActionEvent(openDialogType: OperationType, itemSelected: RecipeListViewModel) {
     switch (openDialogType) {
-      case OperationType.Open: {
-        this.router.navigate(['/recipes/detail']);
-        break;
-      }
+      // case OperationType.Open: {
+      //   this.router.navigate(['/recipes/detail']);
+      //   break;
+      // }
       case OperationType.Edit: {
         this.router.navigate(['/recipes/edit', itemSelected.id]);
         break;
@@ -70,7 +70,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   onNewRecipeEvent() {
-    this.router.navigate(['/recipes/edit', '']);
+    this.router.navigate(['/recipes/new']);
   }
 
   private recipeDtoToRecipeListViewModel(recipe: RecipeDto): RecipeListViewModel {

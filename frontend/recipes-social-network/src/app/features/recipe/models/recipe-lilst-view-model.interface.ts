@@ -5,9 +5,9 @@ export interface RecipeListViewModel {
   name: string;
   imagePath?: string;
   readyIn: number;
-  averageRaiting: number;
+  averageRaiting?: number;
   skillLevel: string;
-  description: string;
-  method?: string;
-  ingredients?: string;
+  description?: string;
+  method: string;
+  ingredients: string;
 }

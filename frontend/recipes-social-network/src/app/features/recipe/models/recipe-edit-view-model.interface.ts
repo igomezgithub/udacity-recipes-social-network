@@ -1,13 +1,13 @@
 import { SkillLevel } from "./skill-level.enum";
 
 export interface RecipeEditViewModel {
-  id: string;
+  id?: string;
   name: string;
   imagePath?: string;
   readyIn: number;
-  averageRaiting: number;
+  averageRaiting?: number;
   skillLevel: SkillLevel;
-  description: string;
-  method?: string;
-  ingredients?: string;
+  description?: string;
+  method: string;
+  ingredients: string;
 }

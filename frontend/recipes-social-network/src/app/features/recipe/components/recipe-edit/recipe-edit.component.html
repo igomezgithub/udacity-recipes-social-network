@@ -6,7 +6,7 @@
         <div mat-card-avatar class="header-image"></div>
         <mat-card-title>
           <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="Recipe Name" formControlName="name">
+            <input matInput placeholder="Recipe Name" formControlName="name" required>
             <mat-error *ngIf="geRecipeNameErrorMessage() !== null">{{geRecipeNameErrorMessage()}}</mat-error>
           </mat-form-field>
         </mat-card-title>
@@ -22,11 +22,11 @@
       <mat-card-content>
         <div class="content-footer">
           <mat-form-field appearance="fill">
-            <input matInput placeholder="Ready In" formControlName="readyIn">
+            <input matInput placeholder="Ready In" formControlName="readyIn" required>
             <span matSuffix>&nbsp; min</span>
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-select placeholder="Skill Level" formControlName="skillLevel">
+            <mat-select placeholder="Skill Level" formControlName="skillLevel" required>
               <mat-option *ngFor="let skillLevel of skillLevels" [value]="skillLevel.key">
                 {{ skillLevel.value }}
               </mat-option>
@@ -45,7 +45,7 @@
       <mat-card-header>
         <mat-card-title>
           <label>Ingredients:</label>
-          <div class="content-footer">
+          <!-- <div class="content-footer">
             <mat-form-field class="ingredient-field" appearance="fill">
               <input matInput placeholder="Amount" formControlName="ingredientAmount">
             </mat-form-field>
@@ -57,30 +57,29 @@
                 [disabled]="onActivateIngredientButton()"
                 (click)="onSaveIngredientAction()">Ingredient</button>
             </div>
-          </div>
-        </mat-card-title>
-        <mat-card-subtitle>
+          </div> -->
           <mat-form-field appearance="fill">
             <textarea matInput
               formControlName="ingredients"
-              class="ingredients-textarea-medium">
+              class="ingredients-textarea-medium" required>
             </textarea>
           </mat-form-field>
+        </mat-card-title>
+        <mat-card-subtitle>
           <div style="padding-top: 20px;">
             <label>Method:</label>
             <mat-form-field appearance="fill">
               <textarea matInput
                 formControlName="method"
-                class="ingredients-textarea-large">
+                class="ingredients-textarea-large" required>
               </textarea>
             </mat-form-field>
           </div>
-
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions style="padding: 0 20px 10px 0;">
         <div class="button-container">
-          <button mat-raised-button type="submit" class="button-primary">Save</button>
+          <button mat-raised-button type="submit" class="button-primary" [disabled]="!recipeItemForm.valid">Save</button>
         </div>
       </mat-card-actions>
     </mat-card>
