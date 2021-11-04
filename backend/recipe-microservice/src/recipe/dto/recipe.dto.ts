@@ -1,4 +1,5 @@
 export class RecipeDTO {
+    readonly _id?: string;
     readonly recipeName: string;
     readonly url: string;
     readonly readyIn: number;

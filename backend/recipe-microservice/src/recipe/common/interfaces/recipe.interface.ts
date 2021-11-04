@@ -1,6 +1,7 @@
 import { IComment } from "./comment.interface";
 
 export interface IRecipe extends Document {
+    _id?: string;
     recipeName: string;
     url: string;
     readyIn: number;

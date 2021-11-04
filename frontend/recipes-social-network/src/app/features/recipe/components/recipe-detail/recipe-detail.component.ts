@@ -10,6 +10,7 @@ import { SkillLevel } from '../../models/skill-level.enum';
 export class RecipeDetailComponent implements OnInit {
   id: number = 0;
   recipe: RecipeEditViewModel = {
+    id: '',
     name: '',
     imagePath: '',
     readyIn: 0,

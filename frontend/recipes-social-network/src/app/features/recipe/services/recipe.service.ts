@@ -22,8 +22,8 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  getRecipe(index: number) {
-    return this.recipes[index];
+  getRecipe(id: string): RecipeDto {
+    return this.recipes.filter(recipe => recipe._id === id)[0];
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
@@ -48,6 +48,7 @@ export class RecipeService {
   }
 
   private async addRecipe(recipe: RecipeDto): Promise<any> {
+    delete recipe._id;
     return this.api.post('/recipes', recipe)
       .then((res) => {
         console.log('The recipe saved is: ', res)

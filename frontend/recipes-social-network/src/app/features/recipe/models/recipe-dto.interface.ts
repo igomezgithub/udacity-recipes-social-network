@@ -1,7 +1,8 @@
 
 export interface RecipeDto {
+  _id?: string;
   recipeName: string;
-  imagePath?: string;
+  url?: string;
   readyIn: number;
   averageRaiting: number;
   skillLevel: string;

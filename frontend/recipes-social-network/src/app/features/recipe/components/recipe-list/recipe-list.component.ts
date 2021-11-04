@@ -59,7 +59,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         break;
       }
       case OperationType.Edit: {
-        // this.openEditDomainDialog(itemSelected);
+        this.router.navigate(['/recipes/edit', itemSelected.id]);
         break;
       }
       case OperationType.Delete: {
@@ -70,13 +70,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   onNewRecipeEvent() {
-    this.router.navigate(['/recipes/new']);
+    this.router.navigate(['/recipes/edit', '']);
   }
 
   private recipeDtoToRecipeListViewModel(recipe: RecipeDto): RecipeListViewModel {
     return  {
+      id: recipe._id,
       name: recipe.recipeName,
-      imagePath: recipe.imagePath,
+      imagePath: recipe.url,
       readyIn: recipe.readyIn,
       averageRaiting: 0,
       skillLevel: recipe.skillLevel,

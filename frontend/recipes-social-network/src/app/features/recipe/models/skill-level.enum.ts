@@ -1,7 +1,7 @@
 export enum SkillLevel {
-  None,
-  Beginner,
-  Easy,
-  Intermediate,
-  Experienced
+  None = "None",
+  Beginner = "Beginner",
+  Easy = "Easy",
+  Intermediate = "Intermediate",
+  Experienced = "Experienced"
 }

@@ -22,7 +22,7 @@ const ALL_SKILL_LEVELS: any[] = [
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent implements OnInit {
-  id: number = 0;
+  id: string = '';
   editMode = false;
   recipeItemForm: FormGroup = new FormGroup({});
 
@@ -34,8 +34,8 @@ export class RecipeEditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.editMode = params['id'] != null;
+      this.id = params['id'];
+      this.editMode = params['id'] !== '';
       this.initForm();
     });
   }
@@ -46,7 +46,8 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmit() {
     if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeItemForm.value);
+      console.log('Hola-2');
+      //this.recipeService.updateRecipe(this.id, this.recipeItemForm.value);
     } else {
       const newRecipe: RecipeDto = this.recipeViewModelToRecipeDto(this.recipeItemForm.value);
       this.recipeService.addRecipeAndUpdateList(newRecipe);
@@ -55,31 +56,35 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 
   private initForm() {
+    let id = '';
     let recipeName = '';
     let recipeImagePath: string | undefined = undefined;
     let readyIn: number | undefined = undefined;
     let skillLevel: SkillLevel | undefined = undefined;
     let recipeDescription = '';
-    let recipeIngredients: string = '';
+    let recipeIngredients: string | undefined = undefined;
     let ingredientName: string = '';
     let ingredientAmount: string = '';
-    let method: string = '';
+    let method: string | undefined = undefined;
 
     if (this.editMode) {
-      // const recipe = this.recipeService.getRecipe(this.id);
-      // recipeName = recipe.name;
-      // recipeImagePath = recipe.imagePath;
-      // readyIn = recipe.readyIn;
-      // skillLevel = recipe.skillLevel;
-      // recipeDescription = recipe.description;
-      // method = recipe.description;
+      const recipeSelected: RecipeEditViewModel = this.recipeDtoToRecipeListViewModel(this.recipeService.getRecipe(this.id));
+      id = recipeSelected.id
+      recipeName = recipeSelected.name;
+      recipeImagePath = recipeSelected.imagePath;
+      readyIn = recipeSelected.readyIn;
+      skillLevel = recipeSelected.skillLevel;
+      recipeDescription = recipeSelected.description;
+      recipeIngredients = recipeSelected.ingredients;
+      method = recipeSelected.method;
     }
 
     this.recipeItemForm = new FormGroup({
+      id: new FormControl(id),
       name: new FormControl(recipeName, Validators.required),
       imagePath: new FormControl(recipeImagePath),
       readyIn: new FormControl(readyIn),
@@ -118,8 +123,9 @@ export class RecipeEditComponent implements OnInit {
 
   private recipeViewModelToRecipeDto(recipe: RecipeEditViewModel): RecipeDto {
     return  {
+      _id: recipe.id,
       recipeName: recipe.name,
-      imagePath: recipe.imagePath,
+      url: recipe.imagePath,
       readyIn: recipe.readyIn,
       averageRaiting: 0,
       skillLevel: SkillLevel[recipe.skillLevel],
@@ -127,5 +133,19 @@ export class RecipeEditComponent implements OnInit {
       method: recipe.method,
       ingredients: recipe.ingredients
     } as RecipeDto;
+  }
+
+  private recipeDtoToRecipeListViewModel(recipe: RecipeDto): RecipeEditViewModel {
+    return  {
+      id: recipe._id,
+      name: recipe.recipeName,
+      imagePath: recipe.url,
+      readyIn: recipe.readyIn,
+      averageRaiting: 0,
+      skillLevel: recipe.skillLevel as SkillLevel,
+      description: recipe.description,
+      method: recipe.method,
+      ingredients: recipe.ingredients
+    } as RecipeEditViewModel;
   }
 }

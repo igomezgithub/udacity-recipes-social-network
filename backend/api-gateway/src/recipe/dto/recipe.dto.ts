@@ -3,6 +3,10 @@ import { IsNotEmpty, IsNumber, IsString, ValidateIf } from "class-validator";
 
 export class RecipeDTO {
     @ApiProperty()
+    @IsString()
+    readonly _id: string;
+
+    @ApiProperty()
     @IsNotEmpty()
     @IsString()
     readonly recipeName: string;

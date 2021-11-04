@@ -3,6 +3,7 @@ import { SkillLevel } from "../../models/skill-level.enum";
 
 const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
   {
+    id: '	69abd4abf577d7cfd6d370f146611fea',
     name: 'Cheesy Vegetarian Enchilada Casserole',
     imagePath: '',
     readyIn: 35,
@@ -14,6 +15,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: '7dc3119280f9c8311e874e78b8dade6e',
     name: 'Baked Chicken Schnitzel',
     imagePath: '',
     readyIn: 30,
@@ -26,6 +28,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: '7e1d144fbd18af3fe598dd20b0a973e1',
     name: 'Grilled Cheese Sandwich',
     imagePath: '',
     readyIn: 20,
@@ -36,6 +39,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: 'b87b496fc923f790267c141ac99adf1f',
     name: 'Chicken Cordon Bleu I',
     imagePath: '',
     readyIn: 45,
@@ -46,6 +50,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: '425b35fb162d0be535ab90fceb3e4d41',
     name: 'Bucatini All Amatriciana',
     imagePath: '',
     readyIn: 39,
@@ -56,6 +61,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: '88e79955f7baa96eb82de3816063f9ec',
     name: 'Best Lasagna',
     imagePath: '',
     readyIn: 135,
@@ -65,6 +71,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: 'e69c790d4c1bbeeba00d05e1d00fe529',
     name: `Jan's Jalapeno Popper Pizza`,
     imagePath: '',
     readyIn: 60,
@@ -74,6 +81,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: '51169da6454d8107b5a6f71ae7dd1649',
     name: 'Creamy Chicken and Wild Rice Soup',
     imagePath: '',
     readyIn: 25,
@@ -86,6 +94,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: '06b2b65afa80476f8b4662960f5f9300',
     name: 'Slow Cooker Mediterranean Lentil Stew',
     imagePath: '',
     readyIn: 85,
@@ -98,6 +107,7 @@ const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
     method: '',
     ingredients: ''
   }, {
+    id: '4f58dff265c8d2c38c7b411a7ef41c95',
     name: 'Cream Cheese and Crab Sushi Rolls',
     imagePath: '',
     readyIn: 105,
