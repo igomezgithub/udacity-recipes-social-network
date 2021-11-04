@@ -46,8 +46,7 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmit() {
     if (this.editMode) {
-      console.log('Hola-2');
-      //this.recipeService.updateRecipe(this.id, this.recipeItemForm.value);
+      this.recipeService.updateRecipe(this.id, this.recipeItemForm.value);
     } else {
       const newRecipe: RecipeDto = this.recipeViewModelToRecipeDto(this.recipeItemForm.value);
       this.recipeService.addRecipeAndUpdateList(newRecipe);

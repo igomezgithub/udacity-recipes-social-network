@@ -26,19 +26,16 @@ export class RecipeService {
     return this.recipes.filter(recipe => recipe._id === id)[0];
   }
 
-  addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    //this.slService.addIngredients(ingredients);
-  }
-
   addRecipeAndUpdateList(recipe: RecipeDto) {
-    // const recipeToSave: RecipeDto = this.recipeViewModelToRecipeDto(recipe);
     this.addRecipe(recipe);
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  updateRecipe(index: number, newRecipe: RecipeDto) {
-    this.recipes[index] = newRecipe;
+  async updateRecipe(id: string, newRecipe: RecipeDto) {
+    //this.recipes[index] = newRecipe;
+    this.update(id, newRecipe);
+    this.recipes = await this.updateRecipeList();
     this.recipesChanged.next(this.recipes.slice());
   }
 
@@ -50,6 +47,15 @@ export class RecipeService {
   private async addRecipe(recipe: RecipeDto): Promise<any> {
     delete recipe._id;
     return this.api.post('/recipes', recipe)
+      .then((res) => {
+        console.log('The recipe saved is: ', res)
+        return res;
+      })
+      .catch((e) => { throw e; });
+  }
+
+  private async update(id: string, recipe: RecipeDto): Promise<any> {
+    return this.api.put(`/recipes/${id}`, recipe)
       .then((res) => {
         console.log('The recipe saved is: ', res)
         return res;
