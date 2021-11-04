@@ -63,7 +63,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         break;
       }
       case OperationType.Delete: {
-        // this.deleteDomain(itemSelected.id);
+        this.recipeService.deleteRecipe(itemSelected.id);
         break;
       }
     }

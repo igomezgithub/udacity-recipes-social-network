@@ -75,6 +75,23 @@ export class ApiService {
             });
   }
 
+  async delete(endpoint: any): Promise<any> {
+    const url = `${API_HOST}${endpoint}`;
+    console.log('URL: ', url);
+    return await this.http.delete<HttpEvent<any>>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }
+    })
+            .toPromise()
+            .catch((e: any) => {
+              console.log('Post Error: ', e);
+              ApiService.handleError(e);
+              throw e;
+            });
+  }
+
   async upload(endpoint: string, file: File, payload: any): Promise<any> {
     const signed_url = (await this.get(`${endpoint}/signed-url/${file.name}`)).url;
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ApiService } from 'src/app/core/auth/api.service';
-import { Ingredient } from '../models/ingredient.interface';
 import { RecipeDto } from '../models/recipe-dto.interface';
 
 @Injectable()
@@ -33,14 +32,16 @@ export class RecipeService {
   }
 
   async updateRecipe(id: string, newRecipe: RecipeDto) {
-    //this.recipes[index] = newRecipe;
     this.update(id, newRecipe);
     this.recipes = await this.updateRecipeList();
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  deleteRecipe(index: number) {
-    this.recipes.splice(index, 1);
+  async deleteRecipe(id: string) {
+    this.delete(id);
+    const index = this.recipes.findIndex((recipe) => recipe._id === id);
+    delete this.recipes[index];
+    this.recipes = await this.updateRecipeList();
     this.recipesChanged.next(this.recipes.slice());
   }
 
@@ -68,6 +69,15 @@ export class RecipeService {
       .then((req: any) => {
         console.log('All recipes: ', req)
         return req;
+      })
+      .catch((e) => { throw e; });
+  }
+
+  private async delete(id: string): Promise<any> {
+    return this.api.delete(`/recipes/${id}`)
+      .then((res) => {
+        console.log('The recipe saved is: ', res)
+        return res;
       })
       .catch((e) => { throw e; });
   }
