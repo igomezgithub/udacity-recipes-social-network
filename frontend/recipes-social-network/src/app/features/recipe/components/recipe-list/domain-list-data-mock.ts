@@ -3,7 +3,7 @@ import { SkillLevel } from "../../models/skill-level.enum";
 
 const RECIPES_LIST_MOCK_DATA: RecipeEditViewModel[] = [
   {
-    id: '	69abd4abf577d7cfd6d370f146611fea',
+    id: '69abd4abf577d7cfd6d370f146611fea',
     name: 'Cheesy Vegetarian Enchilada Casserole',
     imagePath: '',
     readyIn: 35,
