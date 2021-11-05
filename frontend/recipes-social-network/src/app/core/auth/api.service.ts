@@ -19,19 +19,19 @@ export class ApiService {
     alert(error.message);
   }
 
-  static extractData(res: HttpEvent<any>) {
-    const body = res;
-    return body || { };
-  }
-
   setAuthToken(token: string) {
-    this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `jwt ${token}`);
+    // this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `Bearer ${token}`);
     this.token = token;
   }
 
   async get(endpoint: any): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
-    const request = this.http.get(url, this.httpOptions).pipe(map(() => ApiService.extractData));
+    const request = this.http.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }
+    });
 
     return await request
             .toPromise()
@@ -44,7 +44,46 @@ export class ApiService {
   async post(endpoint: any, data: any): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
     console.log('URL: ', url);
-    return await this.http.post<HttpEvent<any>>(url, data, this.httpOptions)
+    return await this.http.post<HttpEvent<any>>(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }
+    })
+            .toPromise()
+            .catch((e: any) => {
+              console.log('Post Error: ', e);
+              ApiService.handleError(e);
+              throw e;
+            });
+  }
+
+  async put(endpoint: any, data: any): Promise<any> {
+    const url = `${API_HOST}${endpoint}`;
+    console.log('URL: ', url);
+    return await this.http.put<HttpEvent<any>>(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }
+    })
+            .toPromise()
+            .catch((e: any) => {
+              console.log('Post Error: ', e);
+              ApiService.handleError(e);
+              throw e;
+            });
+  }
+
+  async delete(endpoint: any): Promise<any> {
+    const url = `${API_HOST}${endpoint}`;
+    console.log('URL: ', url);
+    return await this.http.delete<HttpEvent<any>>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }
+    })
             .toPromise()
             .catch((e: any) => {
               console.log('Post Error: ', e);

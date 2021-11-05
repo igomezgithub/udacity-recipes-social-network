@@ -3,24 +3,24 @@ services:
   reverseproxy:
     build:
       context: ./backend/reverseproxy
-    image: igomezdockerhub/recipes-social-network-reverseproxy:v1.03
+    image: igomezdockerhub/recipes-social-network-reverseproxy:v1.04
   api-gateway:
     build:
       context: ./backend/api-gateway
-    image: igomezdockerhub/recipes-social-network-api-gateway:v1.03
+    image: igomezdockerhub/recipes-social-network-api-gateway:v1.04
   recipe-microservice:
     build:
       context: ./backend/recipe-microservice
-    image: igomezdockerhub/recipes-social-network-recipe-microservice:v1.03
+    image: igomezdockerhub/recipes-social-network-recipe-microservice:v1.04
   comment-microservice:
     build:
       context: ./backend/comment-microservice
-    image: igomezdockerhub/recipes-social-network-comment-microservice:v1.03
+    image: igomezdockerhub/recipes-social-network-comment-microservice:v1.04
   user-microservice:
     build:
       context: ./backend/user-microservice
-    image: igomezdockerhub/recipes-social-network-user-microservice:v1.03
+    image: igomezdockerhub/recipes-social-network-user-microservice:v1.04
   frontend:
     build:
       context: ./frontend/recipes-social-network
-    image: igomezdockerhub/recipes-social-network-frontend:v1.03
+    image: igomezdockerhub/recipes-social-network-frontend:v1.04

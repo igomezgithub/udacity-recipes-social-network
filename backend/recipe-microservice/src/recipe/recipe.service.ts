@@ -12,35 +12,34 @@ export class RecipeService {
     constructor(@InjectModel(RECIPE.name) private readonly model: Model<IRecipe>) { }
 
     async create(recipeDTO: RecipeDTO): Promise<IRecipe> {
-        this.logger.debug('Create service');
+        this.logger.debug('This is the recipe to create: ', recipeDTO);
         const newRecipe = new this.model(recipeDTO);
+
+        this.logger.debug('A new recipe to save is: ', newRecipe);
         return await newRecipe.save();
     }
 
     async findAll(): Promise<IRecipe[]> {
-        this.logger.debug('Find All service');
+        this.logger.debug('Find All recipe service');
         return await this.model.find().populate('comments');
     }
 
-    assign ({title, method, ingredients, url, comments }: IRecipe): IRecipe {
-        return Object.assign({
-            title, method, ingredients, url, comments
-        });
-    }
-
     async findOne(id: string): Promise<IRecipe> {
-        this.logger.debug('Find One service');
-        const recipe = await (await this.model.findById(id)).populated('comments');
+        this.logger.debug('Find One recipe service');
+        //const recipe = await (await this.model.findById(id)).populated('comments');
         return this.model.findById(id);
     }
 
     async update(id: string, recipeDTO: RecipeDTO): Promise<IRecipe> {
-        this.logger.debug('Update service');
+        this.logger.debug('Update recipe service');
+        this.logger.debug('Id: ', id);
+        this.logger.debug('Recipe DTO: ', recipeDTO);
+        this.logger.debug('Object Modified: ', await this.model.findByIdAndUpdate(id, recipeDTO, { new: true }))
         return await this.model.findByIdAndUpdate(id, recipeDTO, { new: true });
     }
 
     async delete(id: string) {
-        this.logger.debug('Delete service');
+        this.logger.debug('Delete recipe service');
         await this.model.findByIdAndDelete(id);
         return {
             status: HttpStatus.OK,

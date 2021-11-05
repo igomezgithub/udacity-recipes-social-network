@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-microservice
-        image: igomezdockerhub/recipes-social-network-user-microservice:v1.03
+        image: igomezdockerhub/recipes-social-network-user-microservice:v1.04
         imagePullPolicy: Always
         resources:
           requests:

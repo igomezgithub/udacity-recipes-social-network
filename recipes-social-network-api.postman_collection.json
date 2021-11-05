@@ -7,578 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Public",
-			"item": [
-				{
-					"name": "/api/v0/recipes Get All recipes",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The count is equal to the number of items rx\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.count).to.eql(jsonData.rows.length);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 600ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(600);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v0/recipes",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"recipes"
-							]
-						},
-						"description": "Get all the items in the recipe"
-					},
-					"response": []
-				},
-				{
-					"name": "/api/v0/recipes/:id Get a recipe",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"A single item is returned\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).to.not.eql(null);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v0/recipes/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"recipes",
-								"1"
-							]
-						},
-						"description": "Request a specific recipe item detail"
-					},
-					"response": []
-				},
-				{
-					"name": "/api/v0/recipes Create a recipe",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The count is equal to the number of items rx\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.count).to.eql(jsonData.rows.length);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 600ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(600);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"title\": \"Sheet pan parmesan chicken and veggies\",\r\n\t\"method\": \"Step-1: Preheat the oven to 400 degrees F (200 degrees C). Line a sheet pan with parchment paper. \\nStep-2: Combine oregano, parsley, paprika, garlic powder, seasoned salt, and pepper in a small bowl. \\nStep-3: Place green beans, potato, bell pepper, broccoli, and garlic on the prepared sheet pan. Drizzle olive oil on top and sprinkle with 1/2 of the seasoning mix; toss to coat. Spread vegetables on one side of the pan. \\nStep-4: Place flour in a bowl. Place melted butter in a second bowl. Combine panko, 2/3 cup Parmesan cheese, and the remaining 1/2 of the seasoning mix in a third bowl. \\nStep-5: Remove any excess fat from chicken breasts and slice into 1 1/4 inch strips. Coat chicken strips in flour, then dredge in melted butter, and then dip in the Parmesan-panko mixture until heavily coated. Place on the empty half of the sheet pan and sprinkle with any remaining Parmesan-panko mixture, pressing onto the chicken. \\nStep-6: Bake in the preheated oven for 10 minutes. Remove from the oven, flip chicken strips, stir the veggies, and return to the oven. Bake until chicken juices run clear and veggies are crisp-tender, 10 to 15 minutes. An instant-read thermometer inserted into the center of the chicken should read at least 165 degrees F (74 degrees C). \\nStep-7: While the chicken is baking, whisk together mayonnaise, ketchup, garlic powder, and Worcestershire sauce. \\nStep-8: Remove chicken and veggies from the oven. Toss veggies with remaining Parmesan cheese. Serve with dipping sauce.\",\r\n    \"ingredients\": \"1 tablespoon dried oregano, 1 tablespoon dried parsley, 1 teaspoon paprika, ½ teaspoon garlic powder, ¼ teaspoon seasoned salt, or to taste, ¼ teaspoon ground black pepper, or to taste, ½ pound fresh green beans, trimmed, 1 small red potato, diced, 1 sweet bell pepper, chopped, 1 cup broccoli florets, chopped, 1 tablespoon minced garlic, 3 tablespoons olive oil, ⅓ cup all-purpose flour, 4 tablespoons butter, melted, 1 cup panko bread crumbs, 1 cup freshly grated Parmesan cheese, divided, 1 ½ pounds skinless, boneless chicken breasts, pounded flat\",\r\n    \"rate\": \"4\"\r\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/recipes",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"recipes"
-							]
-						},
-						"description": "Get all the items in the recipe"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete group",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v0/recipes/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"recipes",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/api/v0/users/auth valid registration",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"A single item is returned\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).to.not.eql(null);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\":\"hello@gmail.com\",\n\t\"password\":\"fancypass\"\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/users/auth",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"users",
-								"auth"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/api/v0/users/auth invalid registration",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {",
-									"    pm.response.to.have.status(400);",
-									"});",
-									"",
-									"pm.test(\"auth is false and a message is included in the error body\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).to.not.eql(null);",
-									"    pm.expect(jsonData.message).to.not.eql(null)",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"password\": \"fancypass\"\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/users/auth",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"users",
-								"auth"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/api/v0/users/auth/login valid",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"body includes an email and token\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.auth).to.eql(true);",
-									"    pm.expect(jsonData.user).to.not.eql(null);",
-									"    pm.expect(jsonData.token).to.not.eql(null)",
-									"    ",
-									"    pm.environment.set(\"token\", jsonData.token);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 500ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\":\"hello@gmail.com\",\n\t\"password\":\"fancypass\"\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/users/auth/login",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"users",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/api/v0/users/auth/login invalid",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {",
-									"    pm.response.to.have.status(400);",
-									"});",
-									"",
-									"pm.test(\"auth is false and a message is included in the error body\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).to.not.eql(null);",
-									"    pm.expect(jsonData.message).to.not.eql(null)",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/users/auth/login",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"users",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Unauthorized",
-			"item": [
-				{
-					"name": "/api/v0/recipes unauthorized",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/recipes",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"recipes"
-							]
-						},
-						"description": "Post a new item to the recipe"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Authorized",
-			"item": [
-				{
-					"name": "/api/v0/recipes invalid",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {",
-									"    pm.response.to.have.status(400);",
-									"});",
-									"",
-									"pm.test(\"body includes a message\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.message).to.not.eql(null);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 500ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/recipes",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"recipes"
-							]
-						},
-						"description": "Post a new item to the recipe"
-					},
-					"response": []
-				},
-				{
-					"name": "/api/v0/recipes authorized",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									"",
-									"pm.test(\"The post returns a new item with an id\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).to.not.eql(null);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"caption\": \"Hello\",\n    \"url\": \"test.jpg\"\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/recipes",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"recipes"
-							]
-						},
-						"description": "Post a new item to the recipe"
-					},
-					"response": []
-				}
-			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "{{token}}",
-						"type": "string"
-					}
-				]
-			},
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			]
-		},
-		{
 			"name": "Auth",
 			"item": [
 				{
@@ -620,12 +48,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"userTest\",\n    \"password\": \"123\"\n}"
+							"raw": "{\n    \"username\": \"user\",\n    \"password\": \"123456\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/auth/signin",
+							"raw": "{{localhost}}/api/v0/auth/signin",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -639,7 +67,7 @@
 					"response": []
 				},
 				{
-					"name": "/api/v0/auth/signin SignUp",
+					"name": "/api/v0/auth/signup SignUp",
 					"event": [
 						{
 							"listen": "test",
@@ -677,12 +105,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"user\",\n    \"username\": \"userTest\",\n    \"email\": \"user@mail.com\",\n    \"password\": \"123\"\n}"
+							"raw": "{\n    \"name\": \"user\",\n    \"username\": \"userTest\",\n    \"email\": \"user@mail.com\",\n    \"password\": \"123456\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/auth/signup",
+							"raw": "{{localhost}}/api/v0/auth/signup",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -738,9 +166,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/users",
+							"raw": "{{localhost}}/api/v0/users",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -790,9 +218,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/users/61714c125137461d32c44efd",
+							"raw": "{{localhost}}/api/v0/users/61714c125137461d32c44efd",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -821,15 +249,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/users/617158be34435cca0a6c3c71",
+							"raw": "{{localhost}}/api/v0/users/6171836634f63b9e5702ae3a",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
 								"v0",
 								"users",
-								"617158be34435cca0a6c3c71"
+								"6171836634f63b9e5702ae3a"
 							]
 						}
 					},
@@ -883,15 +311,15 @@
 							"raw": "{\r\n    \"name\": \"other2\",\r\n    \"username\": \"otherTest2\",\r\n    \"email\": \"other2@mail.com\",\r\n    \"password\": \"123\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/users/617156a334435cca0a6c3c6c",
+							"raw": "{{localhost}}/api/v0/users/6171833d34f63b9e5702ae35",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
 								"v0",
 								"users",
-								"617156a334435cca0a6c3c6c"
+								"6171833d34f63b9e5702ae35"
 							]
 						},
 						"description": "Get all the items in the recipe"
@@ -943,12 +371,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Pepito de los Palotes\",\r\n    \"username\": \"pepito\",\r\n    \"email\": \"pepito@mail.com\",\r\n    \"password\": \"123\"\r\n}"
+							"raw": "{\r\n    \"name\": \"other\",\r\n    \"username\": \"otherTest\",\r\n    \"email\": \"other@mail.com\",\r\n    \"password\": \"456\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/users",
+							"raw": "{{localhost}}/api/v0/users",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1003,9 +431,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/recipes",
+							"raw": "{{localhost}}/api/v0/recipes",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1055,9 +483,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/recipes/617170b3ead055276e270c47",
+							"raw": "{{localhost}}/api/v0/recipes/617170b3ead055276e270c47",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1086,9 +514,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/recipes/61716ffeead055276e270c40",
+							"raw": "{{localhost}}/api/v0/recipes/61716ffeead055276e270c40",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1145,18 +573,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"New recipe test 3\",\r\n    \"method\": \"Step-1: Preheat the oven to 400 degrees F (200 degrees C).\",\r\n    \"ingredients\": \"1 tablespoon dried oregano\"\r\n}"
+							"raw": "{\r\n    \"_id\": \"69abd4abf577d7cfd6d370f146611fea\",\r\n    \"recipeName\": \"Cheesy Vegetarian Enchilada Casserole\",\r\n    \"imagePath\": \"\",\r\n    \"readyIn\": \"25\",\r\n    \"averageRaiting\": \"0\",\r\n    \"skillLevel\": \"Easy\",\r\n    \"description\": \"Quick and easy cheesy enchilada casserole. Takes only 6 ingredients to make his popular one-pan amazing Mexican vegetarian dinner dish! Garnish with green onions and sour cream if desired.\",\r\n    \"method\": \"Step-1: Preheat the oven to 400 degrees F (200 degrees C). Line a sheet pan with parchment paper. \\nStep-2: Combine oregano, parsley, paprika, garlic powder, seasoned salt, and pepper in a small bowl. \\nStep-3: Place green beans, potato, bell pepper, broccoli, and garlic on the prepared sheet pan. Drizzle olive oil on top and sprinkle with 1/2 of the seasoning mix; toss to coat. Spread vegetables on one side of the pan. \\nStep-4: Place flour in a bowl. Place melted butter in a second bowl. Combine panko, 2/3 cup Parmesan cheese, and the remaining 1/2 of the seasoning mix in a third bowl. \\nStep-5: Remove any excess fat from chicken breasts and slice into 1 1/4 inch strips. Coat chicken strips in flour, then dredge in melted butter, and then dip in the Parmesan-panko mixture until heavily coated. Place on the empty half of the sheet pan and sprinkle with any remaining Parmesan-panko mixture, pressing onto the chicken. \\nStep-6: Bake in the preheated oven for 10 minutes. Remove from the oven, flip chicken strips, stir the veggies, and return to the oven. Bake until chicken juices run clear and veggies are crisp-tender, 10 to 15 minutes. An instant-read thermometer inserted into the center of the chicken should read at least 165 degrees F (74 degrees C). \\nStep-7: While the chicken is baking, whisk together mayonnaise, ketchup, garlic powder, and Worcestershire sauce. \\nStep-8: Remove chicken and veggies from the oven. Toss veggies with remaining Parmesan cheese. Serve with dipping sauce.\",\r\n    \"ingredients\": \"1 tablespoon dried oregano, 1 tablespoon dried parsley, 1 teaspoon paprika, ½ teaspoon garlic powder, ¼ teaspoon seasoned salt, or to taste, ¼ teaspoon ground black pepper, or to taste, ½ pound fresh green beans, trimmed, 1 small red potato, diced, 1 sweet bell pepper, chopped, 1 cup broccoli florets, chopped, 1 tablespoon minced garlic, 3 tablespoons olive oil, ⅓ cup all-purpose flour, 4 tablespoons butter, melted, 1 cup panko bread crumbs, 1 cup freshly grated Parmesan cheese, divided, 1 ½ pounds skinless, boneless chicken breasts, pounded flat\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/recipes/61717169ead055276e270c4e",
+							"raw": "{{localhost}}/api/v0/recipes/69abd4abf577d7cfd6d370f146611fea",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
 								"v0",
 								"recipes",
-								"61717169ead055276e270c4e"
+								"69abd4abf577d7cfd6d370f146611fea"
 							]
 						},
 						"description": "Get all the items in the recipe"
@@ -1208,12 +636,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Sheet pan parmesan chicken and veggies 3\",\r\n    \"method\": \"Step-1: Preheat the oven to 400 degrees F (200 degrees C). Line a sheet pan with parchment paper. \\nStep-2: Combine oregano, parsley, paprika, garlic powder, seasoned salt, and pepper in a small bowl. \\nStep-3: Place green beans, potato, bell pepper, broccoli, and garlic on the prepared sheet pan. Drizzle olive oil on top and sprinkle with 1/2 of the seasoning mix; toss to coat. Spread vegetables on one side of the pan. \\nStep-4: Place flour in a bowl. Place melted butter in a second bowl. Combine panko, 2/3 cup Parmesan cheese, and the remaining 1/2 of the seasoning mix in a third bowl. \\nStep-5: Remove any excess fat from chicken breasts and slice into 1 1/4 inch strips. Coat chicken strips in flour, then dredge in melted butter, and then dip in the Parmesan-panko mixture until heavily coated. Place on the empty half of the sheet pan and sprinkle with any remaining Parmesan-panko mixture, pressing onto the chicken. \\nStep-6: Bake in the preheated oven for 10 minutes. Remove from the oven, flip chicken strips, stir the veggies, and return to the oven. Bake until chicken juices run clear and veggies are crisp-tender, 10 to 15 minutes. An instant-read thermometer inserted into the center of the chicken should read at least 165 degrees F (74 degrees C). \\nStep-7: While the chicken is baking, whisk together mayonnaise, ketchup, garlic powder, and Worcestershire sauce. \\nStep-8: Remove chicken and veggies from the oven. Toss veggies with remaining Parmesan cheese. Serve with dipping sauce.\",\r\n    \"ingredients\": \"1 tablespoon dried oregano, 1 tablespoon dried parsley, 1 teaspoon paprika, ½ teaspoon garlic powder, ¼ teaspoon seasoned salt, or to taste, ¼ teaspoon ground black pepper, or to taste, ½ pound fresh green beans, trimmed, 1 small red potato, diced, 1 sweet bell pepper, chopped, 1 cup broccoli florets, chopped, 1 tablespoon minced garlic, 3 tablespoons olive oil, ⅓ cup all-purpose flour, 4 tablespoons butter, melted, 1 cup panko bread crumbs, 1 cup freshly grated Parmesan cheese, divided, 1 ½ pounds skinless, boneless chicken breasts, pounded flat\"\r\n}"
+							"raw": "{\r\n    \"recipeName\": \"Cheesy Vegetarian Enchilada Casserole\",\r\n    \"imagePath\": \"\",\r\n    \"readyIn\": \"25\",\r\n    \"averageRaiting\": \"0\",\r\n    \"skillLevel\": \"Easy\",\r\n    \"description\": \"Quick and easy cheesy enchilada casserole. Takes only 6 ingredients to make his popular one-pan amazing Mexican vegetarian dinner dish! Garnish with green onions and sour cream if desired.\",\r\n    \"method\": \"Step-1: Preheat the oven to 400 degrees F (200 degrees C). Line a sheet pan with parchment paper. \\nStep-2: Combine oregano, parsley, paprika, garlic powder, seasoned salt, and pepper in a small bowl. \\nStep-3: Place green beans, potato, bell pepper, broccoli, and garlic on the prepared sheet pan. Drizzle olive oil on top and sprinkle with 1/2 of the seasoning mix; toss to coat. Spread vegetables on one side of the pan. \\nStep-4: Place flour in a bowl. Place melted butter in a second bowl. Combine panko, 2/3 cup Parmesan cheese, and the remaining 1/2 of the seasoning mix in a third bowl. \\nStep-5: Remove any excess fat from chicken breasts and slice into 1 1/4 inch strips. Coat chicken strips in flour, then dredge in melted butter, and then dip in the Parmesan-panko mixture until heavily coated. Place on the empty half of the sheet pan and sprinkle with any remaining Parmesan-panko mixture, pressing onto the chicken. \\nStep-6: Bake in the preheated oven for 10 minutes. Remove from the oven, flip chicken strips, stir the veggies, and return to the oven. Bake until chicken juices run clear and veggies are crisp-tender, 10 to 15 minutes. An instant-read thermometer inserted into the center of the chicken should read at least 165 degrees F (74 degrees C). \\nStep-7: While the chicken is baking, whisk together mayonnaise, ketchup, garlic powder, and Worcestershire sauce. \\nStep-8: Remove chicken and veggies from the oven. Toss veggies with remaining Parmesan cheese. Serve with dipping sauce.\",\r\n    \"ingredients\": \"1 tablespoon dried oregano, 1 tablespoon dried parsley, 1 teaspoon paprika, ½ teaspoon garlic powder, ¼ teaspoon seasoned salt, or to taste, ¼ teaspoon ground black pepper, or to taste, ½ pound fresh green beans, trimmed, 1 small red potato, diced, 1 sweet bell pepper, chopped, 1 cup broccoli florets, chopped, 1 tablespoon minced garlic, 3 tablespoons olive oil, ⅓ cup all-purpose flour, 4 tablespoons butter, melted, 1 cup panko bread crumbs, 1 cup freshly grated Parmesan cheese, divided, 1 ½ pounds skinless, boneless chicken breasts, pounded flat\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/recipes",
+							"raw": "{{localhost}}/api/v0/recipes",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1270,20 +698,20 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Sheet pan parmesan chicken and veggies 3\",\r\n    \"method\": \"Step-1: Preheat the oven to 400 degrees F (200 degrees C). Line a sheet pan with parchment paper. \\nStep-2: Combine oregano, parsley, paprika, garlic powder, seasoned salt, and pepper in a small bowl. \\nStep-3: Place green beans, potato, bell pepper, broccoli, and garlic on the prepared sheet pan. Drizzle olive oil on top and sprinkle with 1/2 of the seasoning mix; toss to coat. Spread vegetables on one side of the pan. \\nStep-4: Place flour in a bowl. Place melted butter in a second bowl. Combine panko, 2/3 cup Parmesan cheese, and the remaining 1/2 of the seasoning mix in a third bowl. \\nStep-5: Remove any excess fat from chicken breasts and slice into 1 1/4 inch strips. Coat chicken strips in flour, then dredge in melted butter, and then dip in the Parmesan-panko mixture until heavily coated. Place on the empty half of the sheet pan and sprinkle with any remaining Parmesan-panko mixture, pressing onto the chicken. \\nStep-6: Bake in the preheated oven for 10 minutes. Remove from the oven, flip chicken strips, stir the veggies, and return to the oven. Bake until chicken juices run clear and veggies are crisp-tender, 10 to 15 minutes. An instant-read thermometer inserted into the center of the chicken should read at least 165 degrees F (74 degrees C). \\nStep-7: While the chicken is baking, whisk together mayonnaise, ketchup, garlic powder, and Worcestershire sauce. \\nStep-8: Remove chicken and veggies from the oven. Toss veggies with remaining Parmesan cheese. Serve with dipping sauce.\",\r\n    \"ingredients\": \"1 tablespoon dried oregano, 1 tablespoon dried parsley, 1 teaspoon paprika, ½ teaspoon garlic powder, ¼ teaspoon seasoned salt, or to taste, ¼ teaspoon ground black pepper, or to taste, ½ pound fresh green beans, trimmed, 1 small red potato, diced, 1 sweet bell pepper, chopped, 1 cup broccoli florets, chopped, 1 tablespoon minced garlic, 3 tablespoons olive oil, ⅓ cup all-purpose flour, 4 tablespoons butter, melted, 1 cup panko bread crumbs, 1 cup freshly grated Parmesan cheese, divided, 1 ½ pounds skinless, boneless chicken breasts, pounded flat\"\r\n}"
+							"raw": "{\r\n    \"_idRecipe\": \"6171838ede23cf44c0480d88\",\r\n    \"comment\": \"\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/recipes/617170b3ead055276e270c47/comment/6171796d0041c2ce7b76296f",
+							"raw": "{{localhost}}/api/v0/recipes/6171838ede23cf44c0480d88/comment/617183e4574274f9f21af89a",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
 								"v0",
 								"recipes",
-								"617170b3ead055276e270c47",
+								"6171838ede23cf44c0480d88",
 								"comment",
-								"6171796d0041c2ce7b76296f"
+								"617183e4574274f9f21af89a"
 							]
 						},
 						"description": "Get all the items in the recipe"
@@ -1333,9 +761,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/comments",
+							"raw": "{{localhost}}/api/v0/comments",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1385,9 +813,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/comments/6171796d0041c2ce7b76296f",
+							"raw": "{{localhost}}/api/v0/comments/6171796d0041c2ce7b76296f",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1416,9 +844,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v0/comments/61717a140041c2ce7b762973",
+							"raw": "{{localhost}}/api/v0/comments/61717a140041c2ce7b762973",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1478,9 +906,9 @@
 							"raw": "{\r\n    \"title\": \"New recipe test 3\",\r\n    \"method\": \"Step-1: Preheat the oven to 400 degrees F (200 degrees C).\",\r\n    \"ingredients\": \"1 tablespoon dried oregano\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/comments/61717169ead055276e270c4e",
+							"raw": "{{localhost}}/api/v0/comments/61717169ead055276e270c4e",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
@@ -1541,14 +969,69 @@
 							"raw": "{\r\n    \"textComment\": \"Fantastic recipe!\",\r\n    \"aliasUser\": \"zenway\",\r\n    \"rate\": \"4\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v0/comments",
+							"raw": "{{localhost}}/api/v0/comments",
 							"host": [
-								"{{host}}"
+								"{{localhost}}"
 							],
 							"path": [
 								"api",
 								"v0",
 								"comments"
+							]
+						},
+						"description": "Get all the items in the recipe"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hello-test",
+			"item": [
+				{
+					"name": "/ Get Hello World",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The count is equal to the number of items rx\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.count).to.eql(jsonData.rows.length);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								""
 							]
 						},
 						"description": "Get all the items in the recipe"
@@ -1581,11 +1064,15 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://localhost:3000"
+			"value": "https://a1f49313f372f480bb379c59ee922f01-640772322.us-east-2.elb.amazonaws.com"
 		},
 		{
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZXN0Iiwic3ViIjoiNjE3MTRjMTI1MTM3NDYxZDMyYzQ0ZWZkIiwiaWF0IjoxNjM0ODE3MDkxLCJleHAiOjE2MzQ4NjAyOTEsImF1ZCI6Imh0dHBzOi8vcmVjaXBlcy1zb2NpYWwtbmV0d29yay5jb20ifQ.XoOWFtz9TL1GC75T5aP4VYQaELcBHbls8P-uBAG4xHY"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZXN0Iiwic3ViIjoiNjE4MGQxMjFmYjMzNDZkMTljZTEzNmU5IiwiaWF0IjoxNjM1ODMyMDk3LCJleHAiOjE2MzU4NzUyOTcsImF1ZCI6Imh0dHBzOi8vcmVjaXBlcy1zb2NpYWwtbmV0d29yay5jb20ifQ.TGXCebvNXfsOtrmper7MHNe3w_oHr0Komb9Ie7tS8w0"
+		},
+		{
+			"key": "localhost",
+			"value": "http://localhost:3000"
 		}
 	]
 }

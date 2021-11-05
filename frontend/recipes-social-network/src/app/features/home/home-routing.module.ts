@@ -7,15 +7,15 @@ import { RecipePageComponent } from '../recipe/pages/recipe-page.component';
 import { HomePageComponent } from './pages/home-page.component';
 
 const homeRoutes: Routes = [
-  { path: '', component: HomePageComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-      { path: 'recipes', component: RecipePageComponent }
-    ]
-  },
-  { path: 'auth/signin', component: LoginComponent },
-  { path: 'auth/signup', component: SignupComponent }
+  // { path: '', component: HomePageComponent,
+  //   canActivate: [AuthGuard],
+  //   children: [
+  //     // { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+  //     { path: 'recipe', component: RecipePageComponent }
+  //   ]
+  // },
+  // { path: 'auth/signin', component: LoginComponent },
+  // { path: 'auth/signup', component: SignupComponent }
 ];
 
 @NgModule({

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-page',
@@ -8,9 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RecipePageComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor() { }
 
-  ngOnInit() {
-    // this.router.navigate(['list', {relativeTo: this.route}]);
-  }
+  ngOnInit() { }
 }

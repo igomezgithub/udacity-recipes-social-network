@@ -1,0 +1,87 @@
+
+<div class="container-card">
+  <form [formGroup]="recipeItemForm" (ngSubmit)="onSubmit()" class="container-form">
+    <mat-card class="card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title>
+          <mat-form-field class="full-width" appearance="fill">
+            <input matInput placeholder="Recipe Name" formControlName="name" required>
+            <mat-error *ngIf="geRecipeNameErrorMessage() !== null">{{geRecipeNameErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <mat-form-field appearance="fill">
+            <input matInput placeholder="Image Path" formControlName="imagePath">
+          </mat-form-field>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <div>
+        <img mat-card-image src="../../../../../assets/img/standard_recipe.jpg" alt="Photo of a Shiba Inu">
+      </div>
+      <mat-card-content>
+        <div class="content-footer">
+          <mat-form-field appearance="fill">
+            <input matInput placeholder="Ready In" formControlName="readyIn" required>
+            <span matSuffix>&nbsp; min</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-select placeholder="Skill Level" formControlName="skillLevel" required>
+              <mat-option *ngFor="let skillLevel of skillLevels" [value]="skillLevel.key">
+                {{ skillLevel.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <p>
+          <mat-form-field appearance="fill" style="min-width: 500px;">
+            <textarea matInput placeholder="Description" formControlName="description"></textarea>
+          </mat-form-field>
+        </p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>
+          <label>Ingredients:</label>
+          <!-- <div class="content-footer">
+            <mat-form-field class="ingredient-field" appearance="fill">
+              <input matInput placeholder="Amount" formControlName="ingredientAmount">
+            </mat-form-field>
+            <mat-form-field class="ingredient-field" appearance="fill">
+              <input matInput placeholder="Ingredient" formControlName="ingredientName">
+            </mat-form-field>
+            <div>
+              <button mat-raised-button type="button" class="button-secundary"
+                [disabled]="onActivateIngredientButton()"
+                (click)="onSaveIngredientAction()">Ingredient</button>
+            </div>
+          </div> -->
+          <mat-form-field appearance="fill">
+            <textarea matInput
+              formControlName="ingredients"
+              class="ingredients-textarea-medium" required>
+            </textarea>
+          </mat-form-field>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <div style="padding-top: 20px;">
+            <label>Method:</label>
+            <mat-form-field appearance="fill">
+              <textarea matInput
+                formControlName="method"
+                class="ingredients-textarea-large" required>
+              </textarea>
+            </mat-form-field>
+          </div>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions style="padding: 0 20px 10px 0;">
+        <div class="button-container">
+          <button mat-raised-button type="submit" class="button-primary" [disabled]="!recipeItemForm.valid">Save</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
