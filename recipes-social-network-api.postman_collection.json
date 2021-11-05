@@ -48,7 +48,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"userTest\",\n    \"password\": \"123\"\n}"
+							"raw": "{\n    \"username\": \"user\",\n    \"password\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{localhost}}/api/v0/auth/signin",
@@ -67,7 +67,7 @@
 					"response": []
 				},
 				{
-					"name": "/api/v0/auth/signin SignUp",
+					"name": "/api/v0/auth/signup SignUp",
 					"event": [
 						{
 							"listen": "test",
@@ -105,7 +105,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"user\",\n    \"username\": \"userTest\",\n    \"email\": \"user@mail.com\",\n    \"password\": \"123\"\n}"
+							"raw": "{\n    \"name\": \"user\",\n    \"username\": \"userTest\",\n    \"email\": \"user@mail.com\",\n    \"password\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{localhost}}/api/v0/auth/signup",
@@ -1068,7 +1068,7 @@
 		},
 		{
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZXN0Iiwic3ViIjoiNjE3Zjk2YTYyMmE0ZDZhOTAyMjE3NmEwIiwiaWF0IjoxNjM1NzUxNjAwLCJleHAiOjE2MzU3OTQ4MDAsImF1ZCI6Imh0dHBzOi8vcmVjaXBlcy1zb2NpYWwtbmV0d29yay5jb20ifQ.EmpT0Mizy3nvs0B3ltijZDWXdSxTcmaE6eGUjbRW6GM"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZXN0Iiwic3ViIjoiNjE4MGQxMjFmYjMzNDZkMTljZTEzNmU5IiwiaWF0IjoxNjM1ODMyMDk3LCJleHAiOjE2MzU4NzUyOTcsImF1ZCI6Imh0dHBzOi8vcmVjaXBlcy1zb2NpYWwtbmV0d29yay5jb20ifQ.TGXCebvNXfsOtrmper7MHNe3w_oHr0Komb9Ie7tS8w0"
 		},
 		{
 			"key": "localhost",
