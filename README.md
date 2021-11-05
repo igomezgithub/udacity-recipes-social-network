@@ -112,3 +112,6 @@ The url to connect to Recipe Social Network in production is: [Recipes Social Ne
     Password: 123456
 
 
+## Project Description
+
+You can read the **project_description.pdf** document to complete the project information.
